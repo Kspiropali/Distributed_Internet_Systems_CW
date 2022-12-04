@@ -1,0 +1,18 @@
+package backend.web;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class PagesConfiguration implements WebMvcConfigurer {
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        //mapping pages in /templates to endpoints
+        registry.addViewController("/chat").setViewName("live_chat_page");
+        registry.addViewController("/http://localhost:8080/user/verifyRegistration?***").setViewName("email_confirmed_page");
+        registry.addViewController("/error").setViewName("error");
+        registry.addViewController("/settings").setViewName("account_settings_page");
+    }
+}
