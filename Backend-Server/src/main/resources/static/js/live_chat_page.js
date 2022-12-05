@@ -1,17 +1,24 @@
 'use strict';
 
-let stompClient = null;
+let stompClient ;
 let currentSubscription;
+let userToAvatarMap = new Map();
 let username = document.cookie.split(",")[0];
 let topic = document.cookie.split(",")[1];
 let socket = new SockJS('/ws');
 
-async function uploadImage() {
+//for registration notification
+let registerSocket = new SockJS('/ws');
+let registerStompClient;
+let currentRegistrationSubscription;
+
+
+ function uploadImage() {
 
     let file = document.querySelector('input[type=file]')['files'][0];
 
     let reader = new FileReader();
-    console.log("next");
+   // console.log("next");
 
     reader.onload = function () {
         if (reader.result.length > 199999) {
@@ -43,17 +50,14 @@ async function uploadImage() {
 
 }
 
-//for registration notification
-let registerSocket = new SockJS('/ws');
-let registerStompClient = null;
-let currentRegistrationSubscription;
+
 
 // Enter new room and leave the other one
 function enterRoom(newRoomId) {
     let roomId = newRoomId;
     //setting roomId cookie
     document.cookie = username + "," + roomId;
-    console.log(roomId)
+   // console.log(roomId)
     //if roomId is not public, it will be in form of user1user2
     //with user1 or user2 being our username, so we remove the username
     if (roomId !== "public") {
@@ -78,12 +82,12 @@ function enterRoom(newRoomId) {
 }
 
 // Connect to WebSocket Server on first time initialising
-async function onConnected() {
+ function onConnected() {
     enterRoom(topic);
 }
 
 // Send message to the server, chatrooms
-async function sendMessage(event) {
+ function sendMessage(event) {
     // check if event.key is literal string
     if (event.key === '"') {
         event.preventDefault();
@@ -113,16 +117,21 @@ async function sendMessage(event) {
 
     event.preventDefault();
 }
-
+////array of array of username,avatar -> [ ["username","avatar" ], ["username","avatar"], ... ]
+//console.log(response);
+////array of username,avatar -> ["username", "avatar"]
+//console.log(response[0]);
+////string of username -> username
+//console.log(response[0][0]);
 // Receive message from the server either JOIN(when a user enters the room) or CHAT(when a user sends message) or LEAVE(when user leaves the room)
-async function onMessageReceived(payload) {
+ function onMessageReceived(payload) {
     let message = JSON.parse(payload.body);
 
     if (message.type === 'CHAT') {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + message.content + `
@@ -139,7 +148,7 @@ async function onMessageReceived(payload) {
                                                     <div class="chat-text">` + message.content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -152,7 +161,7 @@ async function onMessageReceived(payload) {
     } else if (message.type === 'JOIN' && message.sender !== username) {
         document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png">
+                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -163,7 +172,7 @@ async function onMessageReceived(payload) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <img src="data:image/jpeg;base64,` + message.content + `">
@@ -178,13 +187,14 @@ async function onMessageReceived(payload) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <img src="data:image/jpeg;base64,` + message.content + `">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
 
         }
         getActiveUsers();
+        document.getElementById("scroller").scrollBy(0, 100000);
     } else if (message.type === 'RECORDING') {
         //convert base64 to audio ogg blob
         //get a url of the blob and set it to the audio tag
@@ -199,7 +209,7 @@ async function onMessageReceived(payload) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -214,7 +224,7 @@ async function onMessageReceived(payload) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -227,7 +237,7 @@ async function onMessageReceived(payload) {
             /*document.getElementById(message.sender).remove();*/
             document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png">
+                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
                                                                              <span class="status offline"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -239,14 +249,14 @@ async function onMessageReceived(payload) {
 }
 
 // Load message history from the server and enters a room
- function changeChatRoom(roomId) {
+function changeChatRoom(roomId) {
     enterRoom(roomId);
     loadMessageHistory(roomId);
     document.getElementById("scroller").scrollBy(0, 1000000);
 }
 
 //helper function to load message history from the server
-async function loadMessageHistory(room_id_name) {
+ function loadMessageHistory(room_id_name) {
 
     let settings = {
         "url": "http://localhost:8080/download/chat/" + room_id_name + "/messages",
@@ -260,13 +270,13 @@ async function loadMessageHistory(room_id_name) {
 
         for (let i = 0; i < chatHistory.length; i++) {
             if (chatHistory[i].type === 'CHAT') {
-                console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
+               // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
                 if (chatHistory[i].sender === username) {
 
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + chatHistory[i].content + `
@@ -282,7 +292,7 @@ async function loadMessageHistory(room_id_name) {
                                                     <div class="chat-text">` + chatHistory[i].content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -290,13 +300,13 @@ async function loadMessageHistory(room_id_name) {
 
                 }
             } else if (chatHistory[i].type === 'PICTURE') {
-                console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
+               // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
                 if (chatHistory[i].sender === username) {
 
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
@@ -310,7 +320,7 @@ async function loadMessageHistory(room_id_name) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -331,7 +341,7 @@ async function loadMessageHistory(room_id_name) {
                 if (chatHistory[i].sender === username) {
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -346,7 +356,7 @@ async function loadMessageHistory(room_id_name) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png">
+                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -355,30 +365,27 @@ async function loadMessageHistory(room_id_name) {
             }
         }
 
-
+        document.getElementById("scroller").scrollBy(0, 100000);
     });
-    document.getElementById("scroller").scrollBy(0, 100000);
 }
 
 
 
 //When page is ready
 $(document).ready(function () {
-    //setting up the register websocket
-    registerStompClient = Stomp.over(registerSocket)
-    registerStompClient.connect({}, onRegisterSocketConnected);
+
 
     //setting up the actual livechat websocket
     stompClient = Stomp.over(socket);
     stompClient.connect({}, onConnected);
-    //setting up the chat room list
-    document.getElementById('selected_user_name').innerHTML = topic;
-    //setting up username greeter
-    document.getElementById('username_greeter').value = username;
 
-    //setting up recording buttons
-    document.getElementById("stop").disabled = true;
-    document.getElementById("start").disabled = true;
+    //setting up the register websocket
+    registerStompClient = Stomp.over(registerSocket);
+    registerStompClient.connect({}, onRegisterSocketConnected);
+
+    //get all the users avatars
+    getAllAvatars();
+    initializeSockets();
     //getting all registered users
     getAllRegisteredUsers();
     //setting up the active users list
@@ -387,16 +394,33 @@ $(document).ready(function () {
     loadMessageHistory(topic);
     //scrolling to the bottom of the chat box
     document.getElementById("scroller").scrollBy(0, 100000);
+
+
+
+    //setting up the chat room list
+    document.getElementById('selected_user_name').innerHTML = topic;
+    //setting up username greeter
+    document.getElementById('username_greeter').value = username;
+
+    //setting up recording buttons
+    document.getElementById("stop").disabled = true;
+    document.getElementById("start").disabled = true;
+
+
 });
 
-async function getActiveUsers() {
+function initializeSockets() {
+
+}
+
+function getActiveUsers() {
     let settings = {
         "url": "http://localhost:8080/download/chat/users",
         "method": "GET",
     };
 
     $.ajax(settings).done(function (response) {
-        console.log("USERS:" + response);
+        //console.log("USERS:" + response);
         if (response.length > 0) {
 
             for (let i = 0; i < response.length; i++) {
@@ -407,7 +431,7 @@ async function getActiveUsers() {
                     }
                     document.getElementById(response[i]).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png">
+                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(response[i])+`">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + response[i] + `</span></p>
@@ -415,7 +439,7 @@ async function getActiveUsers() {
                 }
             }
         } else {
-            console.log("No online users found yet!");
+           // console.log("No online users found yet!");
         }
     });
 }
@@ -439,7 +463,7 @@ function logout() {
 
 }
 
-async function getAllRegisteredUsers() {
+ function getAllRegisteredUsers() {
     let settings = {
         "url": "http://localhost:8080/download/chat/registeredUsers",
         "method": "GET",
@@ -454,10 +478,11 @@ async function getAllRegisteredUsers() {
                 } else {
                     socketByAlphabeticalOrder = response[i] + username;
                 }
-                console.log(socketByAlphabeticalOrder);
+                //console.log(socketByAlphabeticalOrder);
+                //console.log(userToAvatarMap.get("bob"));
                 document.getElementById("active_users").innerHTML += `<li class="person" onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + response[i] + `">
                                                                             <div class="user">
-                                                                                <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png">
+                                                                                <img src="data:image/jpeg;base64, `+userToAvatarMap.get(response[i])+`">
                                                                                     <span class="status offline"></span>
                                                                             </div>
                                                                                 <p class="name-time"><span class="name">` + response[i] + `</span>
@@ -470,42 +495,52 @@ async function getAllRegisteredUsers() {
 }
 
 // Setups the register callback socket connection
-async function onRegisterSocketConnected() {
+ function onRegisterSocketConnected() {
 
-    if (currentRegistrationSubscription) {
+    /*if (currentRegistrationSubscription) {
         currentRegistrationSubscription.unsubscribe();
-    }
-    currentRegistrationSubscription = stompClient.subscribe(`/channel/registerCallbackSocket`, registerMessageReceived);
+    }*/
+     try{
+         currentRegistrationSubscription = registerStompClient.subscribe(`/channel/registerCallbackSocket`, registerMessageReceived);
+     }
+        catch (e) {
+            registerStompClient.connect({}, onRegisterSocketConnected);
+        }
+
 }
 
 //wrapper function to parse the registered user's name and add it to the list
-async function registerMessageReceived(payload) {
+ function registerMessageReceived(payload) {
     let message = JSON.parse(payload.body);
     if (message.type === 'REGISTER') {
         var socketByAlphabeticalOrder;
         if (username.localeCompare(message.content) === -1) {
-            socketByAlphabeticalOrder = username + message.content;
+            socketByAlphabeticalOrder = username + message.sender;
         } else {
-            socketByAlphabeticalOrder = message.content + username;
+            socketByAlphabeticalOrder = message.sender + username;
         }
-        console.log(socketByAlphabeticalOrder);
-        document.getElementById("active_users").innerHTML += `<li class="person"  onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + message.content + `">
+       // console.log(socketByAlphabeticalOrder);
+        console.log(message.content);
+        document.getElementById("active_users").innerHTML += `<li class="person"  onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + message.sender + `">
                                                                             <div class="user">
-                                                                                <img src="https://www.bootdey.com/img/Content/avatar/avatar4.png">
+                                                                                <img src="data:image/jpeg;base64, `+default_image+`">
                                                                                     <span class="status offline"></span>
                                                                             </div>
-                                                                                <p class="name-time"><span class="name">` + message.content + `</span>
+                                                                                <p class="name-time"><span class="name">` + message.sender + `</span>
                                                                                 </p>
                                                                         </li>`
-    }else if(message.type === 'REMOVE'){
-        document.getElementById(message.content).remove();
+    } else if (message.type === 'REMOVE') {
+        //remove users from the list
+        document.getElementById(message.sender).remove();
+    } else if (message.type === 'SPECIAL'){
+        sendNotification_1("A user has changed their avatar! Reload to see the changes!");
     }
-    console.log(message);
+    //console.log(message);
 }
 
 
 //Account settings button pressed
-async function settingsPage() {
+function settingsPage() {
     //Notify the server that the user is leaving the chatroom
     let chatMessage = {
         sender: username,
@@ -568,7 +603,7 @@ function makeLink() {
         //console.log(base64data);
 
         //send the audio to socket...
-        console.log("Sending audio to socket...");
+        //console.log("Sending audio to socket...");
         let chatMessage = {
             sender: username,
             content: base64data,
@@ -603,3 +638,37 @@ function convertURIToBinary(dataURI) {
     }
     return arr;
 }
+
+
+///get all avatar images
+function getAllAvatars(){
+    let settings = {
+        "url": "http://localhost:8080/user/download/avatars",
+        "method": "POST",
+        async: false,
+    };
+
+    $.ajax(settings).done(function (response) {
+        ////array of array of username,avatar -> [ ["username","avatar" ], ["username","avatar"], ... ]
+        //console.log(response);
+        ////array of username,avatar -> ["username", "avatar"]
+        //console.log(response[0]);
+        ////string of username -> username
+        //console.log(response[0][0]);
+        for (let i = 0; i < response.length; i++) {
+            userToAvatarMap.set(response[i][0], response[i][1]);
+        }
+    });
+}
+
+
+//send notifications
+function sendNotification_1(message){
+    document.getElementById("notification_box").innerHTML = ` <div style="background: #0d0d18;" class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                                            
+                                            <strong class="font__weight-semibold">` + message + `</strong>
+                                        </div>`
+}
+
+//instead of sending get for an already predefined image, just set it here as its base64 encoding
+let default_image = "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABmJLR0QA/wD/AP+gvaeTAAAEEElEQVR4nO2dTahUZRjHf/d6y1tZftyCbrQK7PoZgtKiDwKNSKIgFy3VthKB4EpcuHChmHi1lSAELQsMCWlhuMllUYmbkuAWkZoiiNUkeB0X7wzK4Nxz3jPnff/PmXl+8Ocu7jnzfPzPmTnnnXfeA47jOI7jOE79jKkTiGQc2ARs7vx9EXgeeKLz/3+BP4FfgB+Ac8D3wN3smQ4508AB4A+gHanfO/tOZ896CFkOHANaxBvRq1bntZZlrWCI2AZcZXAjenWl89pOSRYRjuS6jejVbCeWswCTwCnSm9HVqU5M5yEsAr4knxldnQYmMtTXOHK8TfXT0Qz1NYpt6MxoE+5T3k9eZUNYCvyF1pA24epreeJaG8Fx9GZ0dSxxreZ5FvgPvRFdtYDnklZcwLgyOPAR8Jg4hweZBHapk1AxThhnUp8VvZpDf6BKeBl98/tpU8K6F0R5JGwRxi5isyqw0pCNwthFjOQZMiOMXcQqVWClIdLLywJkX2YpDVkijF3Ek6rAyu/U28LYZZD0ZiSvty3jhhjDDTGGG2IMN8QYbogx3BBjuCHGcEOM4YYYww0xhtKQ28LYRbRUgZWG3BTGLkKWm9KQq8LYRfytCqw05KIwdhEXVIGVhvwkjF3Ez+oEFGxAP92nn9YmrNssY9icKPdbyqKLUL5ltYHPhPH7cVKdgJJpwv2I+qzoqgU8k7TiAtR36peBE+IcHmQWuKZOQs0UcAP92XEZ4fQfa3yA1oy7wHvJq2wYJ9EZ8kmG+hrHo8AZ8pvxFb6AQF8eB74lnxmnCQeCswAT5PnN+gkMLhhgeb2sduLXN1m7+j7E6cENMYYbYgw3xBhuiDHcEGO4IcZwQ4xh1ZCtGWK8miFG41kM7Af+J/3QyQ1ge56ymscjwIfAJfKP9p4FXklfYjPork81R34jenUOeAe7b+NJWQbswcZai726BOxmRJYknyEMrd9C3/gitYDPgZeSdELMa8DXhO+u1Y2uovPAu7V3RcCbhGLUDa1L3yFc3GwQVgJfoG9gKp0F1tTWrYRMAoexNRsxlW4Dhwj3TiaZAX5E36jcugisq6F/tbIT+Ad9c1S6BewYuIs1MEYY6lA3xIoOIp488elDkhp1zQ7U0QHYVzLBUdTeAfpaibeB+RoSH1bNA29V7m4kU4SfDauLtq5KzyOpMsn4CPBGhf1GjSWEucrfxOwUe0XwAvArPlu8LHcIoxZzZXeIHfv/GDcjhgnCM1JKE3OGTBCWw1gRE8DhOuFJQvNlNo45Q17HzajC00RMqIgxpJHDzkYo/ayUGEPWV0jECZQefIwxRPZMjSFgddkNYwzxz4/qTJXdMMaQpyok4gSWlt0w5rK3XSER5z6lej2Sk8Icx3Ecx3Ecx3Gc+9wD6vspBPkgA3MAAAAASUVORK5CYII=";

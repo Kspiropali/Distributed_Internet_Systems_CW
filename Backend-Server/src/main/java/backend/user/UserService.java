@@ -1,6 +1,8 @@
 package backend.user;
 
 
+import java.util.ArrayList;
+
 public interface UserService {
     User registerUser(User user);
 
@@ -15,4 +17,8 @@ public interface UserService {
     String updateUser(User user);
 
     String deleteUser(User user);
+
+    String uploadImage(String avatar, String username);
+
+    ArrayList<ArrayList<String>> downloadImages();
 }

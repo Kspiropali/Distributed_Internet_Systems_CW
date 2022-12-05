@@ -1,4 +1,10 @@
-function changeDetails(){
+//for registration notification
+let registerSocket_1 = new SockJS('/ws');
+let registerStompClient_1 = null;
+let currentRegistrationSubscription_1;
+
+
+function changeDetails() {
     let username = document.getElementById("name").value;
     let lastname = document.getElementById("lastname").value;
     let password = document.getElementById("new_password").value;
@@ -7,27 +13,27 @@ function changeDetails(){
     let telephone = document.getElementById("telephone_number").value;
     let optIn = document.getElementById("opt_to_emails_checkbox").checked;
 
-    if(! (document.getElementById("name").value.match(/^[a-zA-Z]+$/) && document.getElementById("name").value.length >= 3 && document.getElementById("name").value.length <= 20)){
+    if (!(document.getElementById("name").value.match(/^[a-zA-Z]+$/) && document.getElementById("name").value.length >= 3 && document.getElementById("name").value.length <= 20)) {
         sendStatus("red", "Name can only contain letters and must be between 3 and 20 characters long");
         return;
     }
 
-    if(! lastname.match(/^[a-zA-Z]+$/) && lastname.length >= 3 && lastname.length <= 20){
+    if (!lastname.match(/^[a-zA-Z]+$/) && lastname.length >= 3 && lastname.length <= 20) {
         sendStatus("red", "Lastname can only contain letters and must be between 3 and 20 characters long");
         return;
     }
 
-    if(password.length < 8 || password.includes("\"")){
+    if (password.length < 8 || password.includes("\"")) {
         sendStatus("red", "Password must be at least 8 characters long and cannot contain \"");
         return;
     }
 
-    if (password !== passwordConfirm){
+    if (password !== passwordConfirm) {
         sendStatus("red", "Passwords do not match");
         return;
     }
 
-    if(! telephone.match(/^[\d\-\s]+$/)){
+    if (!telephone.match(/^[\d\-\s]+$/)) {
         sendStatus("red", "Telephone number can only contain numbers and dashes");
         return;
     }
@@ -53,9 +59,9 @@ function changeDetails(){
 
     $.ajax(settings).done(function (response) {
         console.log(response);
-        if(response.status === 401){
+        if (response.status === 401) {
             document.cookie = "";
-        }else if(response === "User updated"){
+        } else if (response === "User updated") {
 
             sendStatus("green", "User Details updated successfully");
         }
@@ -65,7 +71,7 @@ function changeDetails(){
     event.preventDefault();
 }
 
-function cancelled(){
+function cancelled() {
     document.getElementById("name").value = "";
     document.getElementById("lastname").value = "";
     document.getElementById("new_password").value = "";
@@ -75,7 +81,6 @@ function cancelled(){
     document.getElementById("opt_to_emails_checkbox").checked = false;
     sendStatus("yellow", "Details discarded!");
 }
-
 
 
 async function sendStatus(status, message) {
@@ -118,7 +123,7 @@ async function sendStatus(status, message) {
     }
 }
 
-function deleteAccount(){
+function deleteAccount() {
     let settings = {
         "url": "http://localhost:8080/user/delete",
         "method": "POST",
@@ -134,11 +139,11 @@ function deleteAccount(){
     $.ajax(settings).done(function (response) {
         console.log(response);
         //session expired
-        if(response.status === 401){
+        if (response.status === 401) {
             document.cookie = "";
             window.location.href = "http://localhost:8080/";
             //user deleted
-        }else if (response === "User deleted"){
+        } else if (response === "User deleted") {
             let settings = {
                 "url": "http://localhost:8080/logout",
                 "method": "GET",
@@ -152,4 +157,93 @@ function deleteAccount(){
 
         }
     });
+}
+
+async function uploadAvatarImage() {
+    //getting the avatar image file
+    let file = document.querySelector('input[type=file]')['files'][0];
+
+    let reader = new FileReader();
+
+    reader.onload = function () {
+        if (reader.result.length > 199999) {
+            sendStatus("red", "Image size too large");
+            return;
+        }
+
+        if (reader.result.search()) {
+            sendStatus("red", "Image format not supported");
+            return;
+        }
+
+        let base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
+        //console.log(base64String);
+
+
+        let settings = {
+            "url": "http://localhost:8080/user/upload/avatar",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({
+                "username": document.cookie.split(",")[0],
+                "avatar": base64String
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+
+            if (response.status === 401) {
+                //logout since session is expired
+                let settings = {
+                    "url": "http://localhost:8080/logout",
+                    "method": "GET",
+                    "timeout": 0,
+                };
+
+                $.ajax(settings).done(function (response) {
+                    console.log(response);
+                    window.location.href = "http://localhost:8080/";
+                });
+
+
+            } else if (response === "Avatar updated") {
+                let chatMessage = {
+                    sender: null,
+                    content: null,
+                    type: 'SPECIAL'
+                };
+                registerStompClient_1.send(`/channel/registerCallbackSocket`, {}, JSON.stringify(chatMessage));
+                document.getElementById("avatar_image").src = "data:image/jpeg;base64, " + base64String;
+                sendStatus("green", "Avatar uploaded");
+            }
+        });
+    }
+
+    try {
+        reader.readAsDataURL(file);
+    } catch (e) {
+        console.log(e);
+    }
+
+
+}
+
+
+$(document).ready(function () {
+    registerStompClient_1 = Stomp.over(registerSocket_1)
+    registerStompClient_1.connect({}, onRegisterSocketConnected);
+
+});
+
+function onRegisterSocketConnected() {
+    try {
+        currentRegistrationSubscription_1 = registerStompClient_1.subscribe(`/channel/registerCallbackSocket/sendMessage`);
+    }catch (e){
+        registerStompClient_1.connect({}, onRegisterSocketConnected);
+    }
+
 }

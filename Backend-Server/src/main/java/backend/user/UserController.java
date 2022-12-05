@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -81,6 +82,30 @@ public class UserController {
 
         System.out.println(authentication.getName());
         return userService.deleteUser(user);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/upload/avatar")
+    public String uploadAvatarImage(Authentication authentication, @RequestBody User user) {
+        //header optimisation needed
+        //Making sure that other users cant delete other users other than themselves
+        if (!Objects.equals(authentication.getName(), user.getUsername())) {
+            return "You are not allowed to change of this user!";
+        }
+
+        System.out.println(authentication.getName());
+        return userService.uploadImage(user.getAvatar(), user.getUsername());
+    }
+
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/download/avatars")
+    public ArrayList<ArrayList<String>> downloadAvatarImages() {
+        //header optimisation needed
+        //Making sure that other users cant delete other users other than themselves
+
+
+        return userService.downloadImages();
     }
 
 

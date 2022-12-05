@@ -22,6 +22,7 @@ public class UserConfig {
     }
 
     public void addUsers() {
+        System.out.println("--------------PreSetting up and enabling test users!----------");
         //Testing only, Setup couple of users for testing
         User bob = new User("bob@bob.com", "bob", passwordEncoder.encode("bob"));
         User sam = new User("sam@sam.com","sam", passwordEncoder.encode("sam"));

@@ -3,11 +3,14 @@ package backend.user;
 import backend.email.EmailService;
 import backend.event.EventPublisher;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 @AllArgsConstructor
@@ -38,15 +41,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             }
         }
 
-        //Password validation needed
-
         User user_create = new User();
         user_create.setUsername(user.getUsername());
         user_create.setEmail(user.getEmail());
         user_create.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user_create);
-
+        System.out.println("--------------User with username: "+user_create.getUsername()+" has been created successfully!----------");
         return user_create;
     }
 
@@ -55,7 +56,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         System.out.println(user.getUsername());
         if (checkIfUserExistByUsername(user.getUsername())) {
             User user_update = userRepository.findUserByUsername(user.getUsername()).get();
-            System.out.println("User exists with username: "+user.getUsername());
             //checks
             if(user.getName() == null || !user.getName().matches("^[a-zA-Z]+$") || user.getName().matches("\"") || user.getName().length() < 3 || user.getName().length() > 20){
                 return "Name error";
@@ -99,6 +99,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
     }
 
+    @Override
+    public String uploadImage(String avatar, String username){
+        if (checkIfUserExistByUsername(username)) {
+            User userToUpdate = userRepository.findUserByUsername(username).get();
+            userToUpdate.setAvatar(avatar);
+
+            //sending deleted event
+            //eventPublisher.publishCustomEvent(user_delete.getUsername(), "user deletion");
+            return "Avatar updated";
+        }else {
+            return "username error";
+        }
+    }
+
     public void activateUserAccount(User user) {
         user.setEnabled(true);
         userRepository.save(user);
@@ -125,6 +139,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                         new UsernameNotFoundException(
                                 String.format("user with email %s not found", username)));
     }
+
+    public ArrayList<ArrayList<String>> downloadImages(){
+        ArrayList<User> data = userRepository.findAllByAuthority(new SimpleGrantedAuthority("USER"));
+        ArrayList<ArrayList<String>> procceedData = new ArrayList<>();
+        for (User user : data) {
+            ArrayList<String> temp = new ArrayList<>();
+            temp.add(user.getUsername());
+            temp.add(user.getAvatar());
+            procceedData.add(temp);
+        }
+
+        return procceedData;
+    }
 }
-
-

@@ -17,8 +17,9 @@ public class Message {
     //Join, Leave for online offline users
     //Register, Remove for registered users(with isActivated=true) and deleted users
     //CHAT, PICTURE and RECORDING for messages
+    //SPECIAL is for when users update their profile picture, other users can liveload the new picture
     public enum MessageType {
-        JOIN, LEAVE, CHAT, PICTURE, RECORDING, REGISTER, REMOVE
+        JOIN, LEAVE, CHAT, PICTURE, RECORDING, REGISTER, REMOVE, SPECIAL
     }
 
     @Id
@@ -35,15 +36,15 @@ public class Message {
     //large object data(because of images) or @Lob instead of length
     @Column(name = "content", nullable = true,length = 1000000)
     private String content;
-    @Column(nullable = true, length = 25, unique = false)
+    @Column
     private String sender;
-    @Column(nullable = true, length = 10, unique = false)
+    @Column
     private String type;
-    @Column(nullable = true, length = 25, unique = false)
+    @Column
     private String destination;
 
     @CreationTimestamp
-    @Column(updatable = false, nullable = false, length = 30)
+    @Column
     private Timestamp time;
 
     @Override

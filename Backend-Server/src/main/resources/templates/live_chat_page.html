@@ -7,10 +7,11 @@
     <link type="text/css" rel="stylesheet" href="/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="/css/live_chat_page.css">
-    <link type="text/css" rel="stylesheet" href="css/particles.css">
+    <link type="text/css" rel="stylesheet" href="/css/particles.css">
+    <link type="text/css" rel="stylesheet" href="/css/notification.css">
 
-    <script type="application/javascript" src="js/particles.min.js"></script>
-    <script type="application/javascript" src="js/index.js"></script>
+    <script type="application/javascript" src="/js/particles.min.js"></script>
+    <script type="application/javascript" src="/js/index.js"></script>
     <script type="application/javascript" src="/js/jquery.min.js"></script>
     <script type="application/javascript" src="/js/sockjs.min.js"></script>
     <script type="application/javascript" src="/js/stomp.min.js"></script>
@@ -45,7 +46,9 @@
                             <div class="users-container">
                                 <div class="chat-search-box">
                                     <div class="input-group">
-                                        <input class="form-control" disabled id="username_greeter" style="border-color: #4c2323;background-color: #161515;font-size: 150%;"></div>
+                                        <input class="form-control" disabled id="username_greeter"
+                                               style="border-color: #4c2323;background-color: #161515;font-size: 150%;">
+                                    </div>
                                 </div>
                                 <div class="wrapper">
                                     <div class="main">
@@ -82,7 +85,8 @@
 
                             <div class="">
                                 <div class="col no-gutters">
-                                    <a tabindex="4" class="form-control btn" onclick="settingsPage()">ACCOUNT SETTINGS</a>
+                                    <a tabindex="4" class="form-control btn" onclick="settingsPage()">ACCOUNT
+                                        SETTINGS</a>
                                 </div>
                                 <div class="col no-gutters">
                                     <a onclick="logout()" tabindex="4" class="form-control btn">LOGOUT
@@ -127,12 +131,29 @@
                                               onpaste="event.preventDefault()"></textarea>
                                 </div>
                                 <!--image selector-->
-                                <input type="file" onchange="uploadImage()" id="image_input" accept="image/jpeg" style="display:none;">
-                                <label class="form-control btn-dark" for="image_input" style="text-align: center;">UPLOAD IMAGE</label>
+                                <input type="file" onchange="uploadImage()" id="image_input"
+                                       accept="image/jpeg,image/jpg,image/png" style="display:none;">
+                                <label class="form-control btn-dark" for="image_input" style="text-align: center;">UPLOAD
+                                    IMAGE</label>
 
-                                <button  class="btn btn-default" style="color: white;background: black;border-color: brown;margin-top: 10px;" id="micPermission" onclick="getPermission()">Request Mic Stream</button>
-                                <button id="start" style="color: white;background: black;border-color: brown;margin-top: 10px;" class="btn btn-default" onclick="record()">Start</button>
-                                <button id="stop" class="btn btn-default" style="color: white;background: black;border-color: brown;margin-top: 10px;"  onclick="stopRecord()">Stop</button>
+                                <button class="btn btn-default"
+                                        style="color: white;background: black;border-color: brown;margin-top: 10px;"
+                                        id="micPermission" onclick="getPermission()">Request Mic Stream
+                                </button>
+                                <button id="start"
+                                        style="color: white;background: black;border-color: brown;margin-top: 10px;"
+                                        class="btn btn-default" onclick="record()">Start
+                                </button>
+                                <button id="stop" class="btn btn-default"
+                                        style="color: white;background: black;border-color: brown;margin-top: 10px;"
+                                        onclick="stopRecord()">Stop
+                                </button>
+                            </div>
+
+                            <!--                            Notification area-->
+                            <div id="notification_box" class="col-sm-12">
+
+
                             </div>
                         </div>
                     </div>

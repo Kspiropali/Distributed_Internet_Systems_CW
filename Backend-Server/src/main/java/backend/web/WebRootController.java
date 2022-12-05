@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebRootController {
 
         @RequestMapping(path = "/h2-console")
-        public String index() {
-            return "Hello World!";
+        public void index() {
         }
 }

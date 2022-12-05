@@ -1,5 +1,6 @@
 package backend.chat;
 
+import backend.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,7 +23,7 @@ public class ChatController {
     private final SimpMessageSendingOperations messagingTemplate;
     private final MessageRepository messageRepository;
     private final ChatWrapper chatWrapper;
-
+    private final UserRepository userRepository;
 
     //When users send CHAT message
     @PreAuthorize("hasRole('USER')")
@@ -68,12 +69,17 @@ public class ChatController {
         if (!chatWrapper.getRegisteredUsers().contains(username)) {
             chatWrapper.getRegisteredUsers().add(username);
         }
-        messagingTemplate.convertAndSend("/channel/registerCallbackSocket", new Message(Message.MessageType.REGISTER, username));
+        Message outMessage = new Message();
+        outMessage.setType(Message.MessageType.REGISTER.toString());
+        outMessage.setSender(username);
+        outMessage.setContent(userRepository.findUserByUsername(username).get().getAvatar());
+        System.out.println("--------------User: "+username+" just registered!----------");
+        messagingTemplate.convertAndSend("/channel/registerCallbackSocket", outMessage);
     }
 
     public void sendRemovalMessage(String username) {
-        //System.out.println("removing user from list: " + username);
         chatWrapper.getRegisteredUsers().remove(username);
+        System.out.println("--------------User:"+username+" deleted their account!----------");
         messagingTemplate.convertAndSend("/channel/registerCallbackSocket", new Message(Message.MessageType.REMOVE, username));
     }
 }
