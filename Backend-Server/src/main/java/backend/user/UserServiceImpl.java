@@ -146,14 +146,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public ArrayList<ArrayList<String>> downloadImages(){
         ArrayList<User> data = userRepository.findAllByAuthority(new SimpleGrantedAuthority("USER"));
-        ArrayList<ArrayList<String>> procceedData = new ArrayList<>();
+        ArrayList<ArrayList<String>> dataAfter = new ArrayList<>();
         for (User user : data) {
             ArrayList<String> temp = new ArrayList<>();
             temp.add(user.getUsername());
             temp.add(user.getAvatar());
-            procceedData.add(temp);
+            dataAfter.add(temp);
         }
 
-        return procceedData;
+        return dataAfter;
     }
 }

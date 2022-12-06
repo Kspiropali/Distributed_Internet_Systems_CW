@@ -1,6 +1,6 @@
 'use strict';
 
-let stompClient ;
+let stompClient;
 let currentSubscription;
 let userToAvatarMap = new Map();
 let username = document.cookie.split(",")[0];
@@ -13,12 +13,12 @@ let registerStompClient;
 let currentRegistrationSubscription;
 
 
- function uploadImage() {
+function uploadImage() {
 
     let file = document.querySelector('input[type=file]')['files'][0];
 
     let reader = new FileReader();
-   // console.log("next");
+    // console.log("next");
 
     reader.onload = function () {
         if (reader.result.length > 199999) {
@@ -51,13 +51,12 @@ let currentRegistrationSubscription;
 }
 
 
-
 // Enter new room and leave the other one
 function enterRoom(newRoomId) {
     let roomId = newRoomId;
     //setting roomId cookie
     document.cookie = username + "," + roomId;
-   // console.log(roomId)
+    // console.log(roomId)
     //if roomId is not public, it will be in form of user1user2
     //with user1 or user2 being our username, so we remove the username
     if (roomId !== "public") {
@@ -82,12 +81,12 @@ function enterRoom(newRoomId) {
 }
 
 // Connect to WebSocket Server on first time initialising
- function onConnected() {
+function onConnected() {
     enterRoom(topic);
 }
 
 // Send message to the server, chatrooms
- function sendMessage(event) {
+function sendMessage(event) {
     // check if event.key is literal string
     if (event.key === '"') {
         event.preventDefault();
@@ -117,6 +116,7 @@ function enterRoom(newRoomId) {
 
     event.preventDefault();
 }
+
 ////array of array of username,avatar -> [ ["username","avatar" ], ["username","avatar"], ... ]
 //console.log(response);
 ////array of username,avatar -> ["username", "avatar"]
@@ -124,14 +124,14 @@ function enterRoom(newRoomId) {
 ////string of username -> username
 //console.log(response[0][0]);
 // Receive message from the server either JOIN(when a user enters the room) or CHAT(when a user sends message) or LEAVE(when user leaves the room)
- function onMessageReceived(payload) {
+function onMessageReceived(payload) {
     let message = JSON.parse(payload.body);
 
     if (message.type === 'CHAT') {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + message.content + `
@@ -148,7 +148,7 @@ function enterRoom(newRoomId) {
                                                     <div class="chat-text">` + message.content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -161,7 +161,7 @@ function enterRoom(newRoomId) {
     } else if (message.type === 'JOIN' && message.sender !== username) {
         document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -172,7 +172,7 @@ function enterRoom(newRoomId) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <img src="data:image/jpeg;base64,` + message.content + `">
@@ -187,7 +187,7 @@ function enterRoom(newRoomId) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <img src="data:image/jpeg;base64,` + message.content + `">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -209,7 +209,7 @@ function enterRoom(newRoomId) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -224,7 +224,7 @@ function enterRoom(newRoomId) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -237,7 +237,7 @@ function enterRoom(newRoomId) {
             /*document.getElementById(message.sender).remove();*/
             document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(message.sender)+`">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
                                                                              <span class="status offline"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -256,7 +256,7 @@ function changeChatRoom(roomId) {
 }
 
 //helper function to load message history from the server
- function loadMessageHistory(room_id_name) {
+function loadMessageHistory(room_id_name) {
 
     let settings = {
         "url": "http://localhost:8080/download/chat/" + room_id_name + "/messages",
@@ -270,13 +270,13 @@ function changeChatRoom(roomId) {
 
         for (let i = 0; i < chatHistory.length; i++) {
             if (chatHistory[i].type === 'CHAT') {
-               // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
+                // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
                 if (chatHistory[i].sender === username) {
 
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + chatHistory[i].content + `
@@ -292,7 +292,7 @@ function changeChatRoom(roomId) {
                                                     <div class="chat-text">` + chatHistory[i].content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -300,13 +300,13 @@ function changeChatRoom(roomId) {
 
                 }
             } else if (chatHistory[i].type === 'PICTURE') {
-               // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
+                // console.log(chatHistory[i].sender + " TYPE:" + chatHistory[i].type);
                 if (chatHistory[i].sender === username) {
 
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
@@ -320,7 +320,7 @@ function changeChatRoom(roomId) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -341,7 +341,7 @@ function changeChatRoom(roomId) {
                 if (chatHistory[i].sender === username) {
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -356,7 +356,7 @@ function changeChatRoom(roomId) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, `+userToAvatarMap.get(chatHistory[i].sender)+`">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -368,7 +368,6 @@ function changeChatRoom(roomId) {
         document.getElementById("scroller").scrollBy(0, 100000);
     });
 }
-
 
 
 //When page is ready
@@ -394,7 +393,6 @@ $(document).ready(function () {
     loadMessageHistory(topic);
     //scrolling to the bottom of the chat box
     document.getElementById("scroller").scrollBy(0, 100000);
-
 
 
     //setting up the chat room list
@@ -431,7 +429,7 @@ function getActiveUsers() {
                     }
                     document.getElementById(response[i]).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, `+userToAvatarMap.get(response[i])+`">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + response[i] + `</span></p>
@@ -439,7 +437,7 @@ function getActiveUsers() {
                 }
             }
         } else {
-           // console.log("No online users found yet!");
+            // console.log("No online users found yet!");
         }
     });
 }
@@ -463,7 +461,7 @@ function logout() {
 
 }
 
- function getAllRegisteredUsers() {
+function getAllRegisteredUsers() {
     let settings = {
         "url": "http://localhost:8080/download/chat/registeredUsers",
         "method": "GET",
@@ -482,7 +480,7 @@ function logout() {
                 //console.log(userToAvatarMap.get("bob"));
                 document.getElementById("active_users").innerHTML += `<li class="person" onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + response[i] + `">
                                                                             <div class="user">
-                                                                                <img src="data:image/jpeg;base64, `+userToAvatarMap.get(response[i])+`">
+                                                                                <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `">
                                                                                     <span class="status offline"></span>
                                                                             </div>
                                                                                 <p class="name-time"><span class="name">` + response[i] + `</span>
@@ -495,22 +493,21 @@ function logout() {
 }
 
 // Setups the register callback socket connection
- function onRegisterSocketConnected() {
+function onRegisterSocketConnected() {
 
     if (currentRegistrationSubscription) {
         currentRegistrationSubscription.unsubscribe();
     }
-     try{
-         currentRegistrationSubscription = registerStompClient.subscribe(`/channel/registerCallbackSocket`, registerMessageReceived);
-     }
-        catch (e) {
-            registerStompClient.connect({}, onRegisterSocketConnected);
-        }
+    try {
+        currentRegistrationSubscription = registerStompClient.subscribe(`/channel/registerCallbackSocket`, registerMessageReceived);
+    } catch (e) {
+        registerStompClient.connect({}, onRegisterSocketConnected);
+    }
 
 }
 
 //wrapper function to parse the registered user's name and add it to the list
- function registerMessageReceived(payload) {
+function registerMessageReceived(payload) {
     let message = JSON.parse(payload.body);
     if (message.type === 'REGISTER') {
         var socketByAlphabeticalOrder;
@@ -519,21 +516,22 @@ function logout() {
         } else {
             socketByAlphabeticalOrder = message.sender + username;
         }
-       // console.log(socketByAlphabeticalOrder);
+        // console.log(socketByAlphabeticalOrder);
         console.log(message.content);
         document.getElementById("active_users").innerHTML += `<li class="person"  onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + message.sender + `">
                                                                             <div class="user">
-                                                                                <img src="data:image/jpeg;base64, `+default_image+`">
+                                                                                <img src="data:image/jpeg;base64, ` + default_image + `">
                                                                                     <span class="status offline"></span>
                                                                             </div>
                                                                                 <p class="name-time"><span class="name">` + message.sender + `</span>
                                                                                 </p>
                                                                         </li>`
-    } else if (message.type === 'REMOVE') {
+    } else if (message.type === 'REMOVE' && message.sender !== "deleted") {
         //remove users from the list
-        alert(message.sender);
+
         document.getElementById(message.sender).remove();
-    } else if (message.type === 'SPECIAL'){
+
+    } else if (message.type === 'SPECIAL') {
         sendNotification_1("A user has changed their avatar! Reload to see the changes!");
     }
     //console.log(message);
@@ -642,7 +640,7 @@ function convertURIToBinary(dataURI) {
 
 
 ///get all avatar images
-function getAllAvatars(){
+function getAllAvatars() {
     let settings = {
         "url": "http://localhost:8080/user/download/avatars",
         "method": "POST",
@@ -664,7 +662,7 @@ function getAllAvatars(){
 
 
 //send notifications
-function sendNotification_1(message){
+function sendNotification_1(message) {
     document.getElementById("notification_box").innerHTML = ` <div style="background: #0d0d18;" class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
                                             
                                             <strong class="font__weight-semibold">` + message + `</strong>

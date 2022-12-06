@@ -80,9 +80,19 @@ public class ChatController {
     public void sendRemovalMessage(String username) {
         chatWrapper.getRegisteredUsers().replaceAll(s -> s.equals(username) ? "deleted" : s);
         System.out.println("--------------User:"+username+" deleted their account!----------");
+        for (String s : chatWrapper.getRegisteredUsers()) {
+            if (s.equals("deleted")) {
+                chatWrapper.getRegisteredUsers().remove(s);
+                break;
+            }
+        }
+
+        messageRepository.deleteAllBySender(username);
+
         Message outMessage = new Message();
-        outMessage.setType(Message.MessageType.REGISTER.toString());
+        outMessage.setType(Message.MessageType.REMOVE.toString());
         outMessage.setSender(username);
+        outMessage.setContent("deleted");
         messagingTemplate.convertAndSend("/channel/registerCallbackSocket", outMessage);
     }
 }
