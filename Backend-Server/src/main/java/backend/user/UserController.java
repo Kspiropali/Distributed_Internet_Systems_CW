@@ -111,7 +111,6 @@ public class UserController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/login")
-    //@PreAuthorize("hasAuthority('USER_WRITE')")
     public String terminalLogin() {
         System.out.println("User logged in");
         /*TODO: We cant just return an id here. Implementation of login tokens are required. We can save the token in
@@ -121,7 +120,6 @@ public class UserController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/login")
-    //@PreAuthorize("hasAuthority('USER_WRITE')")
     public String browserLogin() {
         /*TODO: We cant just return an id here. Implementation of login tokens are required. We can save the token in
         cookies with expiration time etc.*/

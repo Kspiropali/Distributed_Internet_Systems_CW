@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final EventPublisher eventPublisher;
 
-
+    @Override
     public User registerUser(User user) {
         if (checkIfUserExistByEmail(user.getEmail())) {
             try {
@@ -113,20 +113,23 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
     }
 
+    @Override
     public void activateUserAccount(User user) {
         user.setEnabled(true);
         userRepository.save(user);
     }
 
+    @Override
     public boolean checkIfUserExistByEmail(String email) {
         return userRepository.findUserByEmail(email).isPresent();
     }
 
-
+    @Override
     public boolean checkIfUserExistByUsername(String username) {
         return userRepository.findUserByUsername(username).isPresent();
     }
 
+    @Override
     public void sendRegistrationConfirmationEmail(String sendTo, String token) {
         emailService.sendSimpleMail(sendTo, token);
     }
@@ -140,6 +143,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                                 String.format("user with email %s not found", username)));
     }
 
+    @Override
     public ArrayList<ArrayList<String>> downloadImages(){
         ArrayList<User> data = userRepository.findAllByAuthority(new SimpleGrantedAuthority("USER"));
         ArrayList<ArrayList<String>> procceedData = new ArrayList<>();

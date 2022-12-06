@@ -16,7 +16,7 @@ import java.util.Date;
 @Setter
 @ToString
 @Entity
-@Table(name = "TOKENS")
+@Table(name = "_TOKENS")
 public class Token {
 
     //Expiration time 10 minutes

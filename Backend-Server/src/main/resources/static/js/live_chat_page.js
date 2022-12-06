@@ -231,7 +231,7 @@ function enterRoom(newRoomId) {
 
         }
         document.getElementById("scroller").scrollBy(0, 1000000);
-
+        getActiveUsers();
     } else if (message.type === 'LEAVE' && message.sender !== username) {
         if (document.getElementById(message.sender) !== null) {
             /*document.getElementById(message.sender).remove();*/
@@ -426,8 +426,8 @@ function getActiveUsers() {
             for (let i = 0; i < response.length; i++) {
                 if (response[i] !== username) {
                     if (document.getElementById(response[i]) === null) {
-                        window.location.reload();
-                        return;
+                        continue;
+
                     }
                     document.getElementById(response[i]).innerHTML = `
                                                                       <div class="user">
@@ -497,9 +497,9 @@ function logout() {
 // Setups the register callback socket connection
  function onRegisterSocketConnected() {
 
-    /*if (currentRegistrationSubscription) {
+    if (currentRegistrationSubscription) {
         currentRegistrationSubscription.unsubscribe();
-    }*/
+    }
      try{
          currentRegistrationSubscription = registerStompClient.subscribe(`/channel/registerCallbackSocket`, registerMessageReceived);
      }
@@ -531,6 +531,7 @@ function logout() {
                                                                         </li>`
     } else if (message.type === 'REMOVE') {
         //remove users from the list
+        alert(message.sender);
         document.getElementById(message.sender).remove();
     } else if (message.type === 'SPECIAL'){
         sendNotification_1("A user has changed their avatar! Reload to see the changes!");

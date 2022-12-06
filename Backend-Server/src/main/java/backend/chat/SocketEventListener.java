@@ -26,6 +26,7 @@ public class SocketEventListener {
     //logged in users
     private ArrayList<String> users;
 
+    //handles when a user connects to the chat
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
@@ -38,6 +39,7 @@ public class SocketEventListener {
         logger.info("Received a new web socket connection. from User: " + username);
     }
 
+    //handles when a user disconnects from the chat
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
@@ -61,6 +63,7 @@ public class SocketEventListener {
         }
     }
 
+    //handles when a user joins a chat aka online status
     public ArrayList<String> getUsers() {
         return users;
     }

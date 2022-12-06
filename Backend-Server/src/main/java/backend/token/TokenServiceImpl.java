@@ -58,7 +58,7 @@ public class TokenServiceImpl implements TokenService {
         return foundToken.getUser();
     }
 
-
+    @Override
     public Token generateNewToken(String oldToken) {
         //finding the old token provided
         Token newToken = tokenRepository.findByToken(oldToken);

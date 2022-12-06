@@ -16,6 +16,7 @@ public class EmailServiceImpl implements EmailService {
     private final String subject = "Verification Token";
     private final JavaMailSender javaMailSender;
 
+    @Override
     public void sendSimpleMail(String sendTo, String token) {
         try {
 
@@ -33,6 +34,7 @@ public class EmailServiceImpl implements EmailService {
         }
     }
 
+    @Override
     public String sendMailWithAttachment(String sendTo, String token) {
         MimeMessage mimeMessage
                 = javaMailSender.createMimeMessage();
