@@ -53,6 +53,7 @@ function uploadImage() {
 
 // Enter new room and leave the other one
 function enterRoom(newRoomId) {
+    let toUser;
     let roomId = newRoomId;
     //setting roomId cookie
     document.cookie = username + "," + roomId;
@@ -60,7 +61,7 @@ function enterRoom(newRoomId) {
     //if roomId is not public, it will be in form of user1user2
     //with user1 or user2 being our username, so we remove the username
     if (roomId !== "public") {
-        var toUser = roomId.replace(username, "");
+        toUser = roomId.replace(username, "");
     } else {
         toUser = roomId;
     }
@@ -131,7 +132,7 @@ function onMessageReceived(payload) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + message.content + `
@@ -148,7 +149,7 @@ function onMessageReceived(payload) {
                                                     <div class="chat-text">` + message.content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -161,7 +162,7 @@ function onMessageReceived(payload) {
     } else if (message.type === 'JOIN' && message.sender !== username) {
         document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -172,10 +173,10 @@ function onMessageReceived(payload) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
-                                                    <img src="data:image/jpeg;base64,` + message.content + `">
+                                                    <img src="data:image/jpeg;base64,` + message.content + `" alt="">
                                                     <div class="chat-hour">` + new Date().toLocaleTimeString().slice(0, -3) + `<span
                                                             class="fa fa-check-circle"></span></div>
                                                 </li>`
@@ -185,9 +186,9 @@ function onMessageReceived(payload) {
             document.getElementById("chat_message_box").innerHTML += `<li class="chat-right">
                                                     <div class="chat-hour">` + new Date().toLocaleTimeString().slice(0, -3) + `<span
                                                             class="fa fa-check-circle"></span></div>
-                                                    <img src="data:image/jpeg;base64,` + message.content + `">
+                                                    <img src="data:image/jpeg;base64,` + message.content + `" alt="">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -197,7 +198,7 @@ function onMessageReceived(payload) {
         document.getElementById("scroller").scrollBy(0, 100000);
     } else if (message.type === 'RECORDING') {
         //convert base64 to audio ogg blob
-        //get a url of the blob and set it to the audio tag
+        //get an url of the blob and set it to the audio tag
         //play the audio
         let binary = convertURIToBinary(message.content);
         let blob = new Blob([binary], {
@@ -209,7 +210,7 @@ function onMessageReceived(payload) {
         if (message.sender === username) {
             document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -224,7 +225,7 @@ function onMessageReceived(payload) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                         <div class="chat-name">` + message.sender + `</div>
                                                     </div>
                                                 </li>`
@@ -237,7 +238,7 @@ function onMessageReceived(payload) {
             /*document.getElementById(message.sender).remove();*/
             document.getElementById(message.sender).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(message.sender) + `" alt="">
                                                                              <span class="status offline"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + message.sender + `</span></p>
@@ -276,7 +277,7 @@ function loadMessageHistory(room_id_name) {
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <div class="chat-text">` + chatHistory[i].content + `
@@ -292,7 +293,7 @@ function loadMessageHistory(room_id_name) {
                                                     <div class="chat-text">` + chatHistory[i].content + `
                                                     </div>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -306,10 +307,10 @@ function loadMessageHistory(room_id_name) {
                     // use <br> to cut the text into two lines
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
-                                                    <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
+                                                    <img src="data:image/jpeg;base64,` + chatHistory[i].content + `" alt="">
                                                     <div class="chat-hour">` + chatHistory[i].time.slice(11, 16) + `<span
                                                             class="fa fa-check-circle"></span></div>
                                                 </li>`
@@ -318,9 +319,9 @@ function loadMessageHistory(room_id_name) {
                     document.getElementById("chat_message_box").innerHTML += `<li class="chat-right">
                                                     <div class="chat-hour">` + chatHistory[i].time.slice(11, 16) + `<span
                                                             class="fa fa-check-circle"></span></div>
-                                                    <img src="data:image/jpeg;base64,` + chatHistory[i].content + `">
+                                                    <img src="data:image/jpeg;base64,` + chatHistory[i].content + `" alt="">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -329,7 +330,7 @@ function loadMessageHistory(room_id_name) {
                 }
             } else if (chatHistory[i].type === 'RECORDING') {
                 //convert base64 to audio ogg blob
-                //get a url of the blob and set it to the audio tag
+                //get an url of the blob and set it to the audio tag
                 //play the audio
                 let binary = convertURIToBinary(chatHistory[i].content);
                 let blob = new Blob([binary], {
@@ -341,7 +342,7 @@ function loadMessageHistory(room_id_name) {
                 if (chatHistory[i].sender === username) {
                     document.getElementById("chat_message_box").innerHTML += ` <li class="chat-left">
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
@@ -356,7 +357,7 @@ function loadMessageHistory(room_id_name) {
                                                             class="fa fa-check-circle"></span></div>
                                                     <audio controls type="audio/ogg" src="` + blobUrl + `"></audio>
                                                     <div class="chat-avatar">
-                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `">
+                                                        <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(chatHistory[i].sender) + `" alt="">
                                                         <div class="chat-name">` + chatHistory[i].sender + `</div>
                                                     </div>
                                                 </li>`
@@ -429,7 +430,7 @@ function getActiveUsers() {
                     }
                     document.getElementById(response[i]).innerHTML = `
                                                                       <div class="user">
-                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `">
+                                                                         <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `" alt="">
                                                                              <span class="status online"></span>
                                                                       </div>
                                                                         <p class="name-time"><span class="name">` + response[i] + `</span></p>
@@ -470,7 +471,7 @@ function getAllRegisteredUsers() {
     $.ajax(settings).done(function (response) {
         for (let i = 0; i < response.length; i++) {
             if (response[i] !== username) {
-                var socketByAlphabeticalOrder;
+                let socketByAlphabeticalOrder;
                 if (username.localeCompare(response[i]) === -1) {
                     socketByAlphabeticalOrder = username + response[i];
                 } else {
@@ -480,7 +481,7 @@ function getAllRegisteredUsers() {
                 //console.log(userToAvatarMap.get("bob"));
                 document.getElementById("active_users").innerHTML += `<li class="person" onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + response[i] + `">
                                                                             <div class="user">
-                                                                                <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `">
+                                                                                <img src="data:image/jpeg;base64, ` + userToAvatarMap.get(response[i]) + `" alt="">
                                                                                     <span class="status offline"></span>
                                                                             </div>
                                                                                 <p class="name-time"><span class="name">` + response[i] + `</span>
@@ -510,7 +511,7 @@ function onRegisterSocketConnected() {
 function registerMessageReceived(payload) {
     let message = JSON.parse(payload.body);
     if (message.type === 'REGISTER') {
-        var socketByAlphabeticalOrder;
+        let socketByAlphabeticalOrder;
         if (username.localeCompare(message.content) === -1) {
             socketByAlphabeticalOrder = username + message.sender;
         } else {
@@ -520,7 +521,7 @@ function registerMessageReceived(payload) {
         console.log(message.content);
         document.getElementById("active_users").innerHTML += `<li class="person"  onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + message.sender + `">
                                                                             <div class="user">
-                                                                                <img src="data:image/jpeg;base64, ` + default_image + `">
+                                                                                <img src="data:image/jpeg;base64, ` + default_image + `" alt="">
                                                                                     <span class="status offline"></span>
                                                                             </div>
                                                                                 <p class="name-time"><span class="name">` + message.sender + `</span>
@@ -598,7 +599,7 @@ function makeLink() {
     /////////////////////FUTURE ME, DONT CHANGE THIS!!!!
 
     reader.onloadend = function () {
-        var base64data = reader.result;
+        const base64data = reader.result;
         //console.log(base64data);
 
         //send the audio to socket...

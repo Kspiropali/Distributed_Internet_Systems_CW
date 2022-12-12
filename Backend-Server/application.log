@@ -1,532 +1,127 @@
-2022-12-06T16:33:50.567Z  INFO 1971281 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1971281 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:33:50.571Z  INFO 1971281 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:33:50.939Z  INFO 1971281 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:33:51.009Z  INFO 1971281 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:33:51.289Z  INFO 1971281 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:33:51.294Z  INFO 1971281 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:33:51.294Z  INFO 1971281 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:33:51.347Z  INFO 1971281 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:33:51.348Z  INFO 1971281 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 752 ms
-2022-12-06T16:33:51.397Z  INFO 1971281 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:33:51.551Z  INFO 1971281 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:33:51.552Z  INFO 1971281 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:33:51.609Z  INFO 1971281 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:33:51.637Z  INFO 1971281 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:33:51.717Z  WARN 1971281 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:33:51.773Z  INFO 1971281 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:33:52.148Z  INFO 1971281 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:33:52.152Z  INFO 1971281 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:33:52.224Z  INFO 1971281 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:33:52.958Z  INFO 1971281 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:33:53.004Z  INFO 1971281 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@674b2703, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67441705, org.springframework.security.web.context.SecurityContextHolderFilter@472d7f34, org.springframework.security.web.header.HeaderWriterFilter@78ae34f7, org.springframework.web.filter.CorsFilter@2ea2f965, org.springframework.security.web.authentication.logout.LogoutFilter@2cee1bcf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2fb171f5, org.springframework.security.web.session.ConcurrentSessionFilter@295e989, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@452d4bb2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67cc5a38, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@a589070, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4271960c, org.springframework.security.web.session.SessionManagementFilter@19070326, org.springframework.security.web.access.ExceptionTranslationFilter@76fa3dd8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5e92a27]
-2022-12-06T16:33:53.245Z  INFO 1971281 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:33:53.247Z  INFO 1971281 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:33:53.248Z  INFO 1971281 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4bb4adf7]]
-2022-12-06T16:33:53.248Z  INFO 1971281 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:33:53.250Z  INFO 1971281 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.89 seconds (process running for 3.086)
-2022-12-06T16:33:57.983Z  INFO 1971281 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:33:57.983Z  INFO 1971281 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:33:57.984Z  INFO 1971281 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-12-06T16:34:03.909Z  INFO 1971281 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [bob,public] that contained an invalid cookie. That cookie will be ignored.
+2022-12-12T05:36:06.996Z  INFO 350858 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 350858 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
+2022-12-12T05:36:07.000Z  INFO 350858 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
+2022-12-12T05:36:07.382Z  INFO 350858 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-12T05:36:07.459Z  INFO 350858 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 3 JPA repository interfaces.
+2022-12-12T05:36:07.757Z  INFO 350858 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-12T05:36:07.762Z  INFO 350858 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-12T05:36:07.762Z  INFO 350858 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
+2022-12-12T05:36:07.814Z  INFO 350858 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-12T05:36:07.815Z  INFO 350858 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 789 ms
+2022-12-12T05:36:07.862Z  INFO 350858 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-12T05:36:08.007Z  INFO 350858 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
+2022-12-12T05:36:08.008Z  INFO 350858 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-12T05:36:08.064Z  INFO 350858 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-12T05:36:08.092Z  INFO 350858 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
+2022-12-12T05:36:08.169Z  WARN 350858 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-12T05:36:08.224Z  INFO 350858 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-12-12T05:36:08.610Z  INFO 350858 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-12T05:36:08.614Z  INFO 350858 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T05:36:08.676Z  INFO 350858 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
+2022-12-12T05:36:09.392Z  INFO 350858 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2022-12-12T05:36:09.437Z  INFO 350858 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@28f663de, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a3c541e, org.springframework.security.web.context.SecurityContextHolderFilter@50c9b080, org.springframework.security.web.header.HeaderWriterFilter@747216b6, org.springframework.web.filter.CorsFilter@2be89ba5, org.springframework.security.web.authentication.logout.LogoutFilter@762e3836, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@46977829, org.springframework.security.web.session.ConcurrentSessionFilter@427c9a13, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@d833770, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7244b40e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ca6f587, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@408573b1, org.springframework.security.web.session.SessionManagementFilter@358bbbe2, org.springframework.security.web.access.ExceptionTranslationFilter@181a6784, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@56ed9270]
+2022-12-12T05:36:09.670Z  INFO 350858 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-12T05:36:09.671Z  INFO 350858 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-12-12T05:36:09.672Z  INFO 350858 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38499139]]
+2022-12-12T05:36:09.672Z  INFO 350858 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-12-12T05:36:09.674Z  INFO 350858 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.886 seconds (process running for 3.083)
+2022-12-12T05:37:09.322Z  INFO 350858 --- [MessageBroker-2] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
+2022-12-12T05:39:50.372Z  INFO 350858 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-12T05:39:50.372Z  INFO 350858 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-12T05:39:50.373Z  INFO 350858 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-12T05:42:23.875Z  INFO 350858 --- [http-nio-8080-exec-6] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [bob,public] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:34:04.153Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-149] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:34:04.153Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-151] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:34:07.069Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-165] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:34:20.007Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-216] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:34:20.020Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-228] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:34:21.899Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-290] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:34:21.905Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-300] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:34:28.210Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-316] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:34:28.273Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-352] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:34:34.951Z  INFO 1971281 --- [SimpleAsyncTaskExecutor-405] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:34:52.881Z  INFO 1971281 --- [MessageBroker-5] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 7 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(7)-CONNECTED(7)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 75], outboundChannel[pool size = 22, active threads = 0, queued tasks = 0, completed tasks = 22], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 11]
-2022-12-06T16:34:57.374Z  INFO 1971281 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:34:57.374Z  INFO 1971281 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4bb4adf7]]
-2022-12-06T16:34:57.374Z  INFO 1971281 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:34:57.402Z  INFO 1971281 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:34:57.402Z  INFO 1971281 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:34:57.405Z  INFO 1971281 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:34:57.416Z  INFO 1971281 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:34:59.001Z  INFO 1974986 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1974986 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:34:59.003Z  INFO 1974986 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:34:59.388Z  INFO 1974986 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:34:59.464Z  INFO 1974986 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 71 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:34:59.770Z  INFO 1974986 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:34:59.776Z  INFO 1974986 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:34:59.776Z  INFO 1974986 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:34:59.831Z  INFO 1974986 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:34:59.833Z  INFO 1974986 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 800 ms
-2022-12-06T16:34:59.885Z  INFO 1974986 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:35:00.048Z  INFO 1974986 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:35:00.049Z  INFO 1974986 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:35:00.108Z  INFO 1974986 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:35:00.138Z  INFO 1974986 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:35:00.216Z  WARN 1974986 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:35:00.275Z  INFO 1974986 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:35:00.366Z  INFO 1974986 --- [main] o.hibernate.id.enhanced.TableGenerator   : HHH000398: Explicit segment value for id generator [hibernate_sequences.sequence_name] suggested; using default [default]
-2022-12-06T16:35:00.668Z  INFO 1974986 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:35:00.672Z  INFO 1974986 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:35:00.745Z  INFO 1974986 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:35:01.480Z  INFO 1974986 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:35:01.527Z  INFO 1974986 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@e4b9a64, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@35ec9d29, org.springframework.security.web.context.SecurityContextHolderFilter@6e620fa9, org.springframework.security.web.header.HeaderWriterFilter@1d82e396, org.springframework.web.filter.CorsFilter@3cdafb82, org.springframework.security.web.authentication.logout.LogoutFilter@48c56b42, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@76629f82, org.springframework.security.web.session.ConcurrentSessionFilter@40af3dd8, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@28357fc3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@ae4a043, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@405d123c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@28f663de, org.springframework.security.web.session.SessionManagementFilter@a589070, org.springframework.security.web.access.ExceptionTranslationFilter@23b62cc3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3b870ed3]
-2022-12-06T16:35:01.771Z  INFO 1974986 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:35:01.772Z  INFO 1974986 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:35:01.773Z  INFO 1974986 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f7eeaaf]]
-2022-12-06T16:35:01.773Z  INFO 1974986 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:35:01.775Z  INFO 1974986 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.984 seconds (process running for 3.187)
-2022-12-06T16:35:04.573Z  INFO 1974986 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [bob,public] that contained an invalid cookie. That cookie will be ignored.
+2022-12-12T05:42:24.315Z  INFO 350858 --- [SimpleAsyncTaskExecutor-842] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:42:24.323Z  INFO 350858 --- [SimpleAsyncTaskExecutor-849] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:42:57.076Z  INFO 350858 --- [SimpleAsyncTaskExecutor-964] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:42:57.087Z  INFO 350858 --- [SimpleAsyncTaskExecutor-974] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:43:04.195Z  INFO 350858 --- [SimpleAsyncTaskExecutor-994] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:43:04.285Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1028] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:43:06.151Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1094] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:43:06.168Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1104] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:43:06.731Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1117] backend.chat.SocketEventListener         : User Disconnected: bob
+2022-12-12T05:43:06.872Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1172] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:43:06.873Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1179] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:43:40.184Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1215] backend.chat.SocketEventListener         : User Disconnected: bob
+2022-12-12T05:43:40.185Z  INFO 350858 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2022-12-12T05:43:40.185Z  INFO 350858 --- [SimpleAsyncTaskExecutor-1227] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:43:40.185Z  INFO 350858 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38499139]]
+2022-12-12T05:43:40.185Z  INFO 350858 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2022-12-12T05:43:40.218Z  INFO 350858 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T05:43:40.219Z  INFO 350858 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2022-12-12T05:43:40.451Z  INFO 350858 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-12T05:43:40.460Z  INFO 350858 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-12T05:45:29.892Z  INFO 378860 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 378860 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
+2022-12-12T05:45:29.895Z  INFO 378860 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
+2022-12-12T05:45:30.400Z  INFO 378860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-12T05:45:30.520Z  INFO 378860 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114 ms. Found 3 JPA repository interfaces.
+2022-12-12T05:45:31.026Z  INFO 378860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-12T05:45:31.034Z  INFO 378860 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-12T05:45:31.034Z  INFO 378860 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
+2022-12-12T05:45:31.111Z  INFO 378860 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-12T05:45:31.113Z  INFO 378860 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1189 ms
+2022-12-12T05:45:31.190Z  INFO 378860 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-12T05:45:31.371Z  INFO 378860 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
+2022-12-12T05:45:31.372Z  INFO 378860 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-12T05:45:31.455Z  INFO 378860 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-12T05:45:31.489Z  INFO 378860 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
+2022-12-12T05:45:31.591Z  WARN 378860 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2022-12-12T05:45:31.657Z  INFO 378860 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-12-12T05:45:32.154Z  INFO 378860 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-12T05:45:32.160Z  INFO 378860 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T05:45:32.254Z  INFO 378860 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
+2022-12-12T05:45:33.174Z  INFO 378860 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2022-12-12T05:45:33.236Z  INFO 378860 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@28357fc3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c48ea9e, org.springframework.security.web.context.SecurityContextHolderFilter@745c25ed, org.springframework.security.web.header.HeaderWriterFilter@2da7ef3e, org.springframework.web.filter.CorsFilter@25058759, org.springframework.security.web.authentication.logout.LogoutFilter@5d8cbb32, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@18d76c14, org.springframework.security.web.session.ConcurrentSessionFilter@1fbd0850, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7294c9fe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@427c9a13, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50c9b080, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d833770, org.springframework.security.web.session.SessionManagementFilter@23b62cc3, org.springframework.security.web.access.ExceptionTranslationFilter@79864d6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67441705]
+2022-12-12T05:45:33.555Z  INFO 378860 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-12T05:45:33.558Z  INFO 378860 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2022-12-12T05:45:33.559Z  INFO 378860 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d17cd8b]]
+2022-12-12T05:45:33.560Z  INFO 378860 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2022-12-12T05:45:33.562Z  INFO 378860 --- [main] backend.DistributedSystems               : Started DistributedSystems in 3.952 seconds (process running for 4.257)
+2022-12-12T05:45:36.073Z  INFO 378860 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:35:04.577Z  INFO 1974986 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:35:04.577Z  INFO 1974986 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:35:04.578Z  INFO 1974986 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-12-06T16:35:05.047Z  INFO 1974986 --- [SimpleAsyncTaskExecutor-88] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:35:05.047Z  INFO 1974986 --- [SimpleAsyncTaskExecutor-89] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:35:15.694Z  INFO 1974986 --- [SimpleAsyncTaskExecutor-109] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:35:15.749Z  INFO 1974986 --- [SimpleAsyncTaskExecutor-142] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:36:01.404Z  INFO 1974986 --- [MessageBroker-7] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 3 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(3)-CONNECTED(3)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 33, active threads = 0, queued tasks = 0, completed tasks = 33], outboundChannel[pool size = 8, active threads = 0, queued tasks = 0, completed tasks = 8], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 13]
-2022-12-06T16:37:44.331Z  INFO 1974986 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:37:44.331Z  INFO 1974986 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7f7eeaaf]]
-2022-12-06T16:37:44.331Z  INFO 1974986 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:37:44.351Z  INFO 1974986 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:37:44.351Z  INFO 1974986 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:37:44.354Z  INFO 1974986 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:37:44.373Z  INFO 1974986 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:37:46.115Z  INFO 1981950 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1981950 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:37:46.117Z  INFO 1981950 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:37:46.486Z  INFO 1981950 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:37:46.557Z  INFO 1981950 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:37:46.855Z  INFO 1981950 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:37:46.860Z  INFO 1981950 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:37:46.861Z  INFO 1981950 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:37:46.906Z  INFO 1981950 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:37:46.907Z  INFO 1981950 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 766 ms
-2022-12-06T16:37:46.953Z  INFO 1981950 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:37:47.115Z  INFO 1981950 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:37:47.116Z  INFO 1981950 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:37:47.176Z  INFO 1981950 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:37:47.197Z  INFO 1981950 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:37:47.276Z  WARN 1981950 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:37:47.333Z  INFO 1981950 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:37:47.719Z  INFO 1981950 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:37:47.723Z  INFO 1981950 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:37:47.785Z  INFO 1981950 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:37:48.505Z  INFO 1981950 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:37:48.551Z  INFO 1981950 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@d833770, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e4b9a64, org.springframework.security.web.context.SecurityContextHolderFilter@7b842e79, org.springframework.security.web.header.HeaderWriterFilter@f4e235e, org.springframework.web.filter.CorsFilter@35ec9d29, org.springframework.security.web.authentication.logout.LogoutFilter@70a81b4e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5576eef4, org.springframework.security.web.session.ConcurrentSessionFilter@37a74cf4, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7cba8293, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2cee1bcf, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d8de4bd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3cdafb82, org.springframework.security.web.session.SessionManagementFilter@181a6784, org.springframework.security.web.access.ExceptionTranslationFilter@67cc5a38, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7cbcd27e]
-2022-12-06T16:37:48.805Z  INFO 1981950 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:37:48.807Z  INFO 1981950 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:37:48.808Z  INFO 1981950 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2cd6112b]]
-2022-12-06T16:37:48.808Z  INFO 1981950 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:37:48.810Z  INFO 1981950 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.903 seconds (process running for 3.094)
-2022-12-06T16:38:00.467Z  INFO 1981950 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:38:00.582Z  INFO 1981950 --- [http-nio-8080-exec-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:38:00.583Z  INFO 1981950 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:38:00.584Z  INFO 1981950 --- [http-nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-12-06T16:38:06.553Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-106] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:06.553Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-107] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:06.747Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-123] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:38:06.922Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-206] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:06.930Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-218] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:08.160Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-227] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:38:08.222Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-282] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:08.226Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-294] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:13.594Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-352] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:38:13.597Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-364] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:38:17.238Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-381] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:38:17.298Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-416] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:38:24.066Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-468] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:38:24.131Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-521] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:24.138Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-533] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:28.116Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-553] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:38:33.821Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-645] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:33.830Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-655] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:38:48.433Z  INFO 1981950 --- [MessageBroker-14] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 13 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(13)-CONNECTED(13)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 138], outboundChannel[pool size = 36, active threads = 0, queued tasks = 0, completed tasks = 36], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 4, completed tasks = 10]
-2022-12-06T16:39:38.878Z  INFO 1981950 --- [SimpleAsyncTaskExecutor-670] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:39:38.878Z  INFO 1981950 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:39:38.878Z  INFO 1981950 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2cd6112b]]
-2022-12-06T16:39:38.879Z  INFO 1981950 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:39:38.897Z  INFO 1981950 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:39:38.897Z  INFO 1981950 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:39:39.143Z  INFO 1981950 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:39:39.151Z  INFO 1981950 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:39:40.324Z  INFO 1987476 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1987476 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:39:40.326Z  INFO 1987476 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:39:40.697Z  INFO 1987476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:39:40.765Z  INFO 1987476 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:39:41.059Z  INFO 1987476 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:39:41.065Z  INFO 1987476 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:39:41.065Z  INFO 1987476 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:39:41.121Z  INFO 1987476 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:39:41.122Z  INFO 1987476 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 771 ms
-2022-12-06T16:39:41.173Z  INFO 1987476 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:39:41.340Z  INFO 1987476 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:39:41.341Z  INFO 1987476 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:39:41.399Z  INFO 1987476 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:39:41.427Z  INFO 1987476 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:39:41.502Z  WARN 1987476 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:39:41.557Z  INFO 1987476 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:39:41.943Z  INFO 1987476 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:39:41.947Z  INFO 1987476 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:39:42.019Z  INFO 1987476 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:39:42.747Z  INFO 1987476 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:39:42.794Z  INFO 1987476 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c48ea9e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25058759, org.springframework.security.web.context.SecurityContextHolderFilter@4fb1bffd, org.springframework.security.web.header.HeaderWriterFilter@67cc5a38, org.springframework.web.filter.CorsFilter@d833770, org.springframework.security.web.authentication.logout.LogoutFilter@46aa5294, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@517f9ba3, org.springframework.security.web.session.ConcurrentSessionFilter@57bc7f67, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@65e639f2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b842e79, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ea8f277, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e4b9a64, org.springframework.security.web.session.SessionManagementFilter@f4e235e, org.springframework.security.web.access.ExceptionTranslationFilter@472d7f34, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2ea2f965]
-2022-12-06T16:39:43.040Z  INFO 1987476 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:39:43.042Z  INFO 1987476 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:39:43.043Z  INFO 1987476 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4ff7de80]]
-2022-12-06T16:39:43.043Z  INFO 1987476 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:39:43.045Z  INFO 1987476 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.936 seconds (process running for 3.146)
-2022-12-06T16:39:47.313Z  INFO 1987476 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public;] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:39:47.317Z  INFO 1987476 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:39:47.317Z  INFO 1987476 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:39:47.318Z  INFO 1987476 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-12-06T16:39:47.663Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:39:47.663Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-86] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:39:52.176Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-180] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:39:52.182Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-192] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:39:53.873Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-208] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:39:53.917Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-244] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:39:58.356Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-294] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:39:58.420Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-349] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:39:58.430Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-361] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:40:01.288Z  INFO 1987476 --- [SimpleAsyncTaskExecutor-376] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:40:01.288Z  INFO 1987476 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:40:01.288Z  INFO 1987476 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4ff7de80]]
-2022-12-06T16:40:01.288Z  INFO 1987476 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:40:01.320Z  INFO 1987476 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:40:01.320Z  INFO 1987476 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:40:01.323Z  INFO 1987476 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:40:01.337Z  INFO 1987476 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:40:02.362Z  INFO 1989192 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1989192 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:40:02.364Z  INFO 1989192 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:40:02.751Z  INFO 1989192 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:40:02.825Z  INFO 1989192 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:40:03.135Z  INFO 1989192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:40:03.141Z  INFO 1989192 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:40:03.141Z  INFO 1989192 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:40:03.214Z  INFO 1989192 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:40:03.216Z  INFO 1989192 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 828 ms
-2022-12-06T16:40:03.295Z  INFO 1989192 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:40:03.459Z  INFO 1989192 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:40:03.460Z  INFO 1989192 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:40:03.518Z  INFO 1989192 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:40:03.546Z  INFO 1989192 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:40:03.619Z  WARN 1989192 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:40:03.678Z  INFO 1989192 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:40:04.073Z  INFO 1989192 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:40:04.077Z  INFO 1989192 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:40:04.152Z  INFO 1989192 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:40:04.906Z  INFO 1989192 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:40:04.953Z  INFO 1989192 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@28357fc3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c48ea9e, org.springframework.security.web.context.SecurityContextHolderFilter@745c25ed, org.springframework.security.web.header.HeaderWriterFilter@2da7ef3e, org.springframework.web.filter.CorsFilter@25058759, org.springframework.security.web.authentication.logout.LogoutFilter@5d8cbb32, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@18d76c14, org.springframework.security.web.session.ConcurrentSessionFilter@1fbd0850, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7294c9fe, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@427c9a13, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50c9b080, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d833770, org.springframework.security.web.session.SessionManagementFilter@23b62cc3, org.springframework.security.web.access.ExceptionTranslationFilter@79864d6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67441705]
-2022-12-06T16:40:05.201Z  INFO 1989192 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:40:05.202Z  INFO 1989192 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:40:05.203Z  INFO 1989192 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d17cd8b]]
-2022-12-06T16:40:05.203Z  INFO 1989192 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:40:05.205Z  INFO 1989192 --- [main] backend.DistributedSystems               : Started DistributedSystems in 3.068 seconds (process running for 3.271)
-2022-12-06T16:40:10.218Z  INFO 1989192 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public;] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:40:10.222Z  INFO 1989192 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:40:10.222Z  INFO 1989192 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:40:10.223Z  INFO 1989192 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-12-06T16:40:10.515Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:40:10.515Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-86] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:40:19.713Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-180] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:40:19.724Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-194] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:41:04.829Z  INFO 1989192 --- [MessageBroker-18] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[4 current WS(4)-HttpStream(0)-HttpPoll(0), 4 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(4)-CONNECTED(4)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 30, active threads = 0, queued tasks = 0, completed tasks = 30], outboundChannel[pool size = 7, active threads = 0, queued tasks = 0, completed tasks = 7], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 6, completed tasks = 17]
-2022-12-06T16:41:11.086Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-209] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:41:11.086Z  INFO 1989192 --- [SimpleAsyncTaskExecutor-213] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:41:11.087Z  INFO 1989192 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:41:11.088Z  INFO 1989192 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d17cd8b]]
-2022-12-06T16:41:11.088Z  INFO 1989192 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:41:11.109Z  INFO 1989192 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:41:11.109Z  INFO 1989192 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:41:11.112Z  INFO 1989192 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:41:11.133Z  INFO 1989192 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:41:12.402Z  INFO 1992607 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1992607 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:41:12.404Z  INFO 1992607 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:41:12.791Z  INFO 1992607 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:41:12.863Z  INFO 1992607 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:41:13.170Z  INFO 1992607 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:41:13.175Z  INFO 1992607 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:41:13.175Z  INFO 1992607 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:41:13.222Z  INFO 1992607 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:41:13.223Z  INFO 1992607 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 794 ms
-2022-12-06T16:41:13.272Z  INFO 1992607 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:41:13.446Z  INFO 1992607 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:41:13.447Z  INFO 1992607 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:41:13.505Z  INFO 1992607 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:41:13.527Z  INFO 1992607 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:41:13.614Z  WARN 1992607 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:41:13.673Z  INFO 1992607 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:41:14.068Z  INFO 1992607 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:41:14.072Z  INFO 1992607 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:41:14.138Z  INFO 1992607 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:41:14.869Z  INFO 1992607 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:41:14.917Z  INFO 1992607 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c48ea9e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25058759, org.springframework.security.web.context.SecurityContextHolderFilter@4fb1bffd, org.springframework.security.web.header.HeaderWriterFilter@67cc5a38, org.springframework.web.filter.CorsFilter@d833770, org.springframework.security.web.authentication.logout.LogoutFilter@46aa5294, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@517f9ba3, org.springframework.security.web.session.ConcurrentSessionFilter@57bc7f67, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@65e639f2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7b842e79, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ea8f277, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e4b9a64, org.springframework.security.web.session.SessionManagementFilter@f4e235e, org.springframework.security.web.access.ExceptionTranslationFilter@472d7f34, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2ea2f965]
-2022-12-06T16:41:15.158Z  INFO 1992607 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:41:15.159Z  INFO 1992607 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:41:15.160Z  INFO 1992607 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4ff7de80]]
-2022-12-06T16:41:15.160Z  INFO 1992607 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:41:15.162Z  INFO 1992607 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.977 seconds (process running for 3.17)
-2022-12-06T16:41:22.459Z  INFO 1992607 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [bob,public;] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:41:22.464Z  INFO 1992607 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:41:22.464Z  INFO 1992607 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:41:22.466Z  INFO 1992607 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-12-06T16:41:22.778Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-86] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:41:22.778Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:41:23.554Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-146] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:41:23.560Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-158] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:41:27.554Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-175] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:41:27.601Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-210] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:41:35.913Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-264] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:41:35.993Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-315] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:41:35.996Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-327] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:42:14.787Z  INFO 1992607 --- [MessageBroker-19] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 7 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(7)-CONNECTED(7)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 69], outboundChannel[pool size = 20, active threads = 0, queued tasks = 0, completed tasks = 20], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 4, completed tasks = 14]
-2022-12-06T16:43:33.754Z  INFO 1992607 --- [SimpleAsyncTaskExecutor-346] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:43:33.754Z  INFO 1992607 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:43:33.754Z  INFO 1992607 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@4ff7de80]]
-2022-12-06T16:43:33.755Z  INFO 1992607 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:43:33.776Z  INFO 1992607 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:43:33.777Z  INFO 1992607 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:43:33.779Z  INFO 1992607 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:43:33.810Z  INFO 1992607 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:43:35.073Z  INFO 1999758 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 1999758 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:43:35.075Z  INFO 1999758 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:43:35.462Z  INFO 1999758 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:43:35.535Z  INFO 1999758 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:43:35.836Z  INFO 1999758 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:43:35.842Z  INFO 1999758 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:43:35.842Z  INFO 1999758 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:43:35.899Z  INFO 1999758 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:43:35.900Z  INFO 1999758 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 798 ms
-2022-12-06T16:43:35.950Z  INFO 1999758 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:43:36.105Z  INFO 1999758 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:43:36.106Z  INFO 1999758 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:43:36.164Z  INFO 1999758 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:43:36.186Z  INFO 1999758 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:43:36.269Z  WARN 1999758 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:43:36.327Z  INFO 1999758 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:43:36.722Z  INFO 1999758 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:43:36.726Z  INFO 1999758 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:43:36.798Z  INFO 1999758 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:43:37.525Z  INFO 1999758 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:43:37.573Z  INFO 1999758 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@25058759, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@d833770, org.springframework.security.web.context.SecurityContextHolderFilter@427c9a13, org.springframework.security.web.header.HeaderWriterFilter@23b62cc3, org.springframework.web.filter.CorsFilter@e4b9a64, org.springframework.security.web.authentication.logout.LogoutFilter@283645fa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7011eee0, org.springframework.security.web.session.ConcurrentSessionFilter@3f808ad9, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@54a1a6a8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e620fa9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7244b40e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35ec9d29, org.springframework.security.web.session.SessionManagementFilter@1d82e396, org.springframework.security.web.access.ExceptionTranslationFilter@2da7ef3e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4271960c]
-2022-12-06T16:43:37.811Z  INFO 1999758 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:43:37.813Z  INFO 1999758 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:43:37.814Z  INFO 1999758 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@43eea3bd]]
-2022-12-06T16:43:37.814Z  INFO 1999758 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:43:37.816Z  INFO 1999758 --- [main] backend.DistributedSystems               : Started DistributedSystems in 2.961 seconds (process running for 3.166)
-2022-12-06T16:43:55.860Z  INFO 1999758 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public;] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:43:55.865Z  INFO 1999758 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:43:55.865Z  INFO 1999758 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:43:55.866Z  INFO 1999758 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2022-12-06T16:43:56.166Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:43:56.166Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-86] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:43:59.540Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-148] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:43:59.545Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-160] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:44:00.744Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-177] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:44:00.794Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-212] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:44:02.785Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-266] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:02.852Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-317] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:02.857Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-329] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:04.026Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-340] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:04.085Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-393] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:04.091Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-405] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:05.321Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-416] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:05.370Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-469] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:05.378Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-481] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:31.536Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-505] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:31.608Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-560] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:31.608Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-567] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:31.900Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-583] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:31.947Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-634] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:31.953Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-646] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:33.436Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-659] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:44:33.529Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-694] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:35.011Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-754] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:35.019Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-766] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:44:37.452Z  INFO 1999758 --- [MessageBroker-14] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 18 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(18)-CONNECTED(18)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 186], outboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 49], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 4, completed tasks = 11]
-2022-12-06T16:45:21.663Z ERROR 1999758 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: java.lang.Exception: Token is Invalid or used] with root cause
-
-java.lang.Exception: Token is Invalid or used
-	at backend.token.TokenServiceImpl.validateToken(TokenServiceImpl.java:39) ~[main/:na]
-	at backend.user.UserController.verifyRegistration(UserController.java:41) ~[main/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:898) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:810) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1075) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:968) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1003) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:895) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:668) ~[tomcat-embed-core-10.0.23.jar:5.0.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:880) ~[spring-webmvc-6.0.0-M6.jar:6.0.0-M6]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:777) ~[tomcat-embed-core-10.0.23.jar:5.0.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:351) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:98) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:170) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.session.ConcurrentSessionFilter.doFilter(ConcurrentSessionFilter.java:151) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.session.ConcurrentSessionFilter.doFilter(ConcurrentSessionFilter.java:129) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilterInternal(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:360) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:224) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:189) ~[spring-security-web-6.0.0-M7.jar:6.0.0-M7]
-	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:351) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:142) ~[spring-session-core-3.0.0-M4.jar:3.0.0-M4]
-	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82) ~[spring-session-core-3.0.0-M4.jar:3.0.0-M4]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.0-M6.jar:6.0.0-M6]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:356) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:867) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1762) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.0.23.jar:10.0.23]
-	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
-
-2022-12-06T16:45:22.004Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-865] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:22.011Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-877] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:26.978Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-888] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:45:27.049Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-945] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:45:27.055Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-957] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:45:27.960Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-972] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:45:28.031Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1025] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:28.035Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1037] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:30.105Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1056] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:45:32.774Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1141] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:32.778Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1151] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:45:34.346Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1169] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:49:45.707Z  INFO 1999758 --- [SimpleAsyncTaskExecutor-1214] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:49:45.707Z  INFO 1999758 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:49:45.707Z  INFO 1999758 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@43eea3bd]]
-2022-12-06T16:49:45.707Z  INFO 1999758 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:49:45.726Z  INFO 1999758 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:49:45.726Z  INFO 1999758 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:49:45.969Z  INFO 1999758 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:49:45.985Z  INFO 1999758 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2022-12-06T16:49:47.406Z  INFO 2016083 --- [main] backend.DistributedSystems               : Starting DistributedSystems using Java 17.0.5 on Archy with PID 2016083 (/home/kspir/Distributed_Internet_Systems_CW/Backend-Server/build/classes/java/main started by kspir in /home/kspir/Distributed_Internet_Systems_CW/Backend-Server)
-2022-12-06T16:49:47.408Z  INFO 2016083 --- [main] backend.DistributedSystems               : The following 1 profile is active: "local"
-2022-12-06T16:49:47.797Z  INFO 2016083 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2022-12-06T16:49:47.869Z  INFO 2016083 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 67 ms. Found 3 JPA repository interfaces.
-2022-12-06T16:49:48.182Z  INFO 2016083 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2022-12-06T16:49:48.187Z  INFO 2016083 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-06T16:49:48.187Z  INFO 2016083 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.0.23]
-2022-12-06T16:49:48.240Z  INFO 2016083 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-06T16:49:48.241Z  INFO 2016083 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 807 ms
-2022-12-06T16:49:48.291Z  INFO 2016083 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2022-12-06T16:49:48.444Z  INFO 2016083 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn1: url=jdbc:h2:file:~/h2 user=SA
-2022-12-06T16:49:48.445Z  INFO 2016083 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2022-12-06T16:49:48.503Z  INFO 2016083 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2022-12-06T16:49:48.526Z  INFO 2016083 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.3.Final
-2022-12-06T16:49:48.611Z  WARN 2016083 --- [main] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
-2022-12-06T16:49:48.669Z  INFO 2016083 --- [main] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2022-12-06T16:49:49.065Z  INFO 2016083 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2022-12-06T16:49:49.069Z  INFO 2016083 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:49:49.143Z  INFO 2016083 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/h2'
-2022-12-06T16:49:49.884Z  INFO 2016083 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2022-12-06T16:49:49.933Z  INFO 2016083 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@43f23338, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2ca8bd50, org.springframework.security.web.context.SecurityContextHolderFilter@298f7b0a, org.springframework.security.web.header.HeaderWriterFilter@57bc7f67, org.springframework.web.filter.CorsFilter@47db5b8f, org.springframework.security.web.authentication.logout.LogoutFilter@17c7cc93, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@15eaa2ce, org.springframework.security.web.session.ConcurrentSessionFilter@50c9b080, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7a3c541e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ca6f587, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23471f48, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2c4142f8, org.springframework.security.web.session.SessionManagementFilter@37a74cf4, org.springframework.security.web.access.ExceptionTranslationFilter@7b9e7633, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7294c9fe]
-2022-12-06T16:49:50.202Z  INFO 2016083 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2022-12-06T16:49:50.203Z  INFO 2016083 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2022-12-06T16:49:50.204Z  INFO 2016083 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2265a052]]
-2022-12-06T16:49:50.205Z  INFO 2016083 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2022-12-06T16:49:50.206Z  INFO 2016083 --- [main] backend.DistributedSystems               : Started DistributedSystems in 3.022 seconds (process running for 3.222)
-2022-12-06T16:49:56.413Z  INFO 2016083 --- [http-nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [sam,public] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2022-12-06T16:49:56.416Z  INFO 2016083 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2022-12-06T16:49:56.417Z  INFO 2016083 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2022-12-06T16:49:56.417Z  INFO 2016083 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2022-12-06T16:49:56.746Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:49:56.746Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-86] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:50:01.248Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-148] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:50:01.256Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-162] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:50:26.965Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-283] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:50:49.806Z  INFO 2016083 --- [MessageBroker-16] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 4 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(4)-CONNECTED(4)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 120], outboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 52], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 4, completed tasks = 14]
-2022-12-06T16:51:02.587Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-301] backend.chat.SocketEventListener         : User Disconnected: bob
-2022-12-06T16:51:02.644Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-334] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
-2022-12-06T16:51:14.537Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-433] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
-2022-12-06T16:51:14.546Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-447] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
-2022-12-06T16:51:38.968Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-463] backend.chat.SocketEventListener         : User Disconnected: john
-2022-12-06T16:51:47.189Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-575] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:51:47.196Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-587] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
-2022-12-06T16:51:52.255Z  INFO 2016083 --- [SimpleAsyncTaskExecutor-620] backend.chat.SocketEventListener         : User Disconnected: sam
-2022-12-06T16:51:54.444Z  INFO 2016083 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-2022-12-06T16:51:54.444Z  INFO 2016083 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2265a052]]
-2022-12-06T16:51:54.444Z  INFO 2016083 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
-2022-12-06T16:51:54.473Z  INFO 2016083 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2022-12-06T16:51:54.473Z  INFO 2016083 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
-2022-12-06T16:51:54.476Z  INFO 2016083 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2022-12-06T16:51:54.499Z  INFO 2016083 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2022-12-12T05:45:36.078Z  INFO 378860 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-12T05:45:36.078Z  INFO 378860 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-12T05:45:36.079Z  INFO 378860 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2022-12-12T05:45:36.486Z  INFO 378860 --- [SimpleAsyncTaskExecutor-80] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:45:36.491Z  INFO 378860 --- [SimpleAsyncTaskExecutor-87] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:45:37.688Z  INFO 378860 --- [SimpleAsyncTaskExecutor-146] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:45:37.716Z  INFO 378860 --- [SimpleAsyncTaskExecutor-158] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:45:42.141Z  INFO 378860 --- [SimpleAsyncTaskExecutor-195] backend.chat.SocketEventListener         : User Disconnected: bob
+2022-12-12T05:45:42.294Z  INFO 378860 --- [SimpleAsyncTaskExecutor-230] backend.chat.SocketEventListener         : Received a new web socket connection. from User: bob
+2022-12-12T05:45:46.540Z  INFO 378860 --- [SimpleAsyncTaskExecutor-284] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:45:46.658Z  INFO 378860 --- [SimpleAsyncTaskExecutor-337] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:45:46.675Z  INFO 378860 --- [SimpleAsyncTaskExecutor-347] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:45:48.989Z  INFO 378860 --- [SimpleAsyncTaskExecutor-364] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:45:51.989Z  INFO 378860 --- [SimpleAsyncTaskExecutor-455] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:45:51.999Z  INFO 378860 --- [SimpleAsyncTaskExecutor-465] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:46:33.073Z  INFO 378860 --- [MessageBroker-18] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[2 current WS(2)-HttpStream(0)-HttpPoll(0), 9 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(9)-CONNECTED(9)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 48, active threads = 0, queued tasks = 0, completed tasks = 117], outboundChannel[pool size = 31, active threads = 0, queued tasks = 0, completed tasks = 31], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 4, completed tasks = 14]
+2022-12-12T05:46:36.933Z  INFO 378860 --- [SimpleAsyncTaskExecutor-535] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
+2022-12-12T05:46:36.955Z  INFO 378860 --- [SimpleAsyncTaskExecutor-547] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
+2022-12-12T05:46:39.794Z  INFO 378860 --- [SimpleAsyncTaskExecutor-560] backend.chat.SocketEventListener         : User Disconnected: john
+2022-12-12T05:46:39.908Z  INFO 378860 --- [SimpleAsyncTaskExecutor-597] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
+2022-12-12T05:46:41.333Z  INFO 378860 --- [SimpleAsyncTaskExecutor-657] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
+2022-12-12T05:46:41.342Z  INFO 378860 --- [SimpleAsyncTaskExecutor-666] backend.chat.SocketEventListener         : Received a new web socket connection. from User: john
+2022-12-12T05:46:44.793Z  INFO 378860 --- [SimpleAsyncTaskExecutor-687] backend.chat.SocketEventListener         : User Disconnected: john
+2022-12-12T05:47:18.493Z  INFO 378860 --- [SimpleAsyncTaskExecutor-786] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:18.502Z  INFO 378860 --- [SimpleAsyncTaskExecutor-795] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:20.517Z  INFO 378860 --- [SimpleAsyncTaskExecutor-812] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:47:20.641Z  INFO 378860 --- [SimpleAsyncTaskExecutor-868] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:47:20.650Z  INFO 378860 --- [SimpleAsyncTaskExecutor-877] backend.chat.SocketEventListener         : Received a new web socket connection. from User: sam
+2022-12-12T05:47:21.241Z  INFO 378860 --- [SimpleAsyncTaskExecutor-895] backend.chat.SocketEventListener         : User Disconnected: test
+2022-12-12T05:47:21.356Z  INFO 378860 --- [SimpleAsyncTaskExecutor-946] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:21.381Z  INFO 378860 --- [SimpleAsyncTaskExecutor-960] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:29.955Z  INFO 378860 --- [SimpleAsyncTaskExecutor-1019] backend.chat.SocketEventListener         : User Disconnected: test
+2022-12-12T05:47:33.378Z  INFO 378860 --- [SimpleAsyncTaskExecutor-1106] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:33.402Z  INFO 378860 --- [SimpleAsyncTaskExecutor-1120] backend.chat.SocketEventListener         : Received a new web socket connection. from User: test
+2022-12-12T05:47:44.093Z  INFO 378860 --- [SimpleAsyncTaskExecutor-1136] backend.chat.SocketEventListener         : User Disconnected: sam
+2022-12-12T05:47:45.946Z  INFO 378860 --- [SimpleAsyncTaskExecutor-1182] backend.chat.SocketEventListener         : User Disconnected: test
+2022-12-12T06:16:33.074Z  INFO 378860 --- [MessageBroker-14] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 22 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(22)-CONNECTED(22)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 309], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 88], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 407]
+2022-12-12T06:46:33.074Z  INFO 378860 --- [MessageBroker-8] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 22 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(22)-CONNECTED(22)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 309], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 88], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 798]
+2022-12-12T07:16:33.074Z  INFO 378860 --- [MessageBroker-8] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 22 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(22)-CONNECTED(22)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 309], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 88], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 1189]
+2022-12-12T07:46:33.075Z  INFO 378860 --- [MessageBroker-10] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 22 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(22)-CONNECTED(22)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 309], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 88], sockJsScheduler[pool size = 24, active threads = 1, queued tasks = 2, completed tasks = 1580]
+2022-12-12T08:10:10.953Z  INFO 378860 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2022-12-12T08:10:10.953Z  INFO 378860 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6d17cd8b]]
+2022-12-12T08:10:10.954Z  INFO 378860 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2022-12-12T08:10:10.973Z  INFO 378860 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-12T08:10:10.974Z  INFO 378860 --- [SpringApplicationShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2022-12-12T08:10:11.218Z  INFO 378860 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-12T08:10:11.239Z  INFO 378860 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
