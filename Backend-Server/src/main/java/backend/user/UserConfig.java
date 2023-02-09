@@ -22,18 +22,18 @@ public class UserConfig {
     }
 
     public void addUsers() {
-        System.out.println("--------------PreSetting up and enabling test users!----------");
+        //System.out.println("--------------PreSetting up and enabling test users!----------");
         //Testing only, Setup couple of users for testing
-        User bob = new User("bob@bob.com", "bob", passwordEncoder.encode("bob"));
+        User admin = new User("admin@admin.com", "admin", passwordEncoder.encode("secureadmin123!"));
         User sam = new User("sam@sam.com", "sam", passwordEncoder.encode("sam"));
-        User john = new User("john@john.com", "john", passwordEncoder.encode("john"));
-        bob.setEnabled(true);
+        //User john = new User("john@john.com", "john", passwordEncoder.encode("john"));
+        admin.setEnabled(true);
         sam.setEnabled(true);
-        john.setEnabled(true);
+        //john.setEnabled(true);
         ArrayList<User> users = new ArrayList<>();
-        users.add(bob);
+        users.add(admin);
         users.add(sam);
-        users.add(john);
+        //users.add(john);
         userRepository.saveAll(users);
 
         //passing through the above automatically registered users(for testing) to the registeredUsers

@@ -9,7 +9,7 @@ public class PagesConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        System.out.println("--------------Web pages set successfully----------");
+        //System.out.println("--------------Web pages set successfully----------");
         //mapping pages in /templates to endpoints
         registry.addViewController("/chat").setViewName("live_chat_page");
         registry.addViewController("/http://localhost:8080/user/verifyRegistration?***").setViewName("email_confirmed_page");

@@ -25,7 +25,7 @@ public class MyBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoi
 
     @Override
     public void afterPropertiesSet() {
-        System.out.println("--------------Custom Security Authentication Provider set successfully!----------");
+       // System.out.println("--------------Custom Security Authentication Provider set successfully!----------");
         setRealmName("Custom_Authentication_Realm");
         super.afterPropertiesSet();
     }

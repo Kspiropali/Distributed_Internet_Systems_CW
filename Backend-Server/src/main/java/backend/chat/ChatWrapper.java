@@ -33,22 +33,21 @@ public class ChatWrapper {
         // finds all messages that are equal to a roomId(or topic)
         //and maps them to an arraylist: [[message1], [message2], [message3]]]
         // where message = ["id","content","sender","destination","type","timestamp"]
-        ArrayList<Object> messages = messageRepository
+
+        //System.out.println("--------------exporting online users----------");
+
+        return messageRepository
                 .findAll()
                 .stream()
                 .filter(message -> message.getDestination().equals(roomId))
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-
-        System.out.println("--------------exporting online users----------");
-
-        return messages;
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/chat/users")
     public ArrayList<String> getOnlineUsers() {
         //find all users that are connected to an opened socket
-        System.out.println("--------------exporting online users----------");
+        //System.out.println("--------------exporting online users----------");
         return socketEventListener.getUsers();
     }
 
@@ -56,7 +55,7 @@ public class ChatWrapper {
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/chat/registeredUsers")
     public ArrayList<String> getRegisteredUsers() {
-        System.out.println("--------------exporting registered users----------");
+       // System.out.println("--------------exporting registered users----------");
         //returns all registered and activated=true users
         return registeredUsers;
     }

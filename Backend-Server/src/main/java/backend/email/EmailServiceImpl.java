@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class EmailServiceImpl implements EmailService {
-    private final String msgBody = "Your registration is: http://localhost:8080/user/verifyRegistration?token=";
-    private final String subject = "Verification Token";
+    private final String msgBody = "Your registration is: https://amazingapp.tplinkdns.com:8443/user/verifyRegistration?token=";
+    private final String subject = "Verify your email address";
     private final JavaMailSender javaMailSender;
 
     @Override
@@ -22,12 +22,13 @@ public class EmailServiceImpl implements EmailService {
 
             SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-            mailMessage.setFrom("escapingthetrenchlol@gmail.com");
+            mailMessage.setFrom("amazingapp.tplinkdns.com@gmail.com");
             mailMessage.setTo(sendTo);
-            mailMessage.setText(msgBody);
+            mailMessage.setText(msgBody+token);
             mailMessage.setSubject(subject);
 
             // Sending the mail
+           // System.out.println("Sending email to: " + sendTo);
             javaMailSender.send(mailMessage);
         } catch (Exception e) {
             System.out.println("Could not send Email because of: " + e);
@@ -44,7 +45,7 @@ public class EmailServiceImpl implements EmailService {
 
             mimeMessageHelper
                     = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setFrom("escapingthetrenchlol@gmail.com");
+            mimeMessageHelper.setFrom("amazingapp.tplinkdns.com@gmail.com");
             mimeMessageHelper.setTo(sendTo);
             mimeMessageHelper.setText(msgBody);
             mimeMessageHelper.setSubject(subject);

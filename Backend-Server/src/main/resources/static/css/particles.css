@@ -151,7 +151,7 @@ html {
 }
 
 .panel li a span:after {
-    font-family: 'icomoon';
+    font-family: 'icomoon', serif;
     margin-left: 10px;
     vertical-align: top
 }
@@ -197,7 +197,7 @@ html {
 }
 
 .dg .c input[type=checkbox] {
-    margin-top: 7.5px !important
+    margin-top: 8px !important
 }
 
 .dg li.save-row {
@@ -272,7 +272,7 @@ html {
 }
 
 #stats, .count-particles {
-    -moz-user-select: -moz-none;
+    -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -290,9 +290,9 @@ html {
 }
 
 .box-top {
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', serif;
     font-size: 1.1em;
-    -moz-user-select: -moz-none;
+    -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
@@ -443,7 +443,7 @@ html {
 }
 
 .box-bottom {
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Pro', serif;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -587,5 +587,3 @@ canvas {
         transform: rotate(360deg)
     }
 }
-
-/*# sourceMappingURL=master.css.map */

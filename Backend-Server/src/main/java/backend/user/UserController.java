@@ -27,9 +27,9 @@ public class UserController {
         User newUser = userService.registerUser(user);
         Token newToken = tokenService.createToken(newUser);
 
-        //userService.sendRegistrationConfirmationEmail(user.getEmail(), newToken.getToken());
+        userService.sendRegistrationConfirmationEmail(user.getEmail(), newToken.getToken());
 
-        System.out.println("Your registration is: http://localhost:8080/user/verifyRegistration?token=" + newToken.getToken());
+        //System.out.println("Your registration is: https://amazingapp.tplinkdns.com:8443/user/verifyRegistration?token=" + newToken.getToken());
 
         return "Success";
     }
@@ -80,7 +80,7 @@ public class UserController {
             return "You are not allowed to delete this user";
         }
 
-        System.out.println(authentication.getName());
+        //System.out.println(authentication.getName());
         return userService.deleteUser(user);
     }
 
@@ -93,7 +93,7 @@ public class UserController {
             return "You are not allowed to change of this user!";
         }
 
-        System.out.println(authentication.getName());
+        //System.out.println(authentication.getName());
         return userService.uploadImage(user.getAvatar(), user.getUsername());
     }
 
@@ -101,9 +101,6 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/download/avatars")
     public ArrayList<ArrayList<String>> downloadAvatarImages() {
-        //header optimisation needed
-        //Making sure that other users cant delete other users other than themselves
-
 
         return userService.downloadImages();
     }
@@ -112,20 +109,15 @@ public class UserController {
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/login")
     public String terminalLogin() {
-        System.out.println("User logged in");
-        /*TODO: We cant just return an id here. Implementation of login tokens are required. We can save the token in
-        cookies with expiration time etc.*/
+        //System.out.println("User logged in");
         return "Logged in!";
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/login")
     public String browserLogin() {
-        /*TODO: We cant just return an id here. Implementation of login tokens are required. We can save the token in
-        cookies with expiration time etc.*/
 
         return "Logged in!";
     }
-
 
 }

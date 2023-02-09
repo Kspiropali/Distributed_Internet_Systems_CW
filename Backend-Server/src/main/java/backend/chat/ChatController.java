@@ -73,13 +73,13 @@ public class ChatController {
         outMessage.setType(Message.MessageType.REGISTER.toString());
         outMessage.setSender(username);
         outMessage.setContent(userRepository.findUserByUsername(username).get().getAvatar());
-        System.out.println("--------------User: "+username+" just registered!----------");
+       // System.out.println("--------------User: "+username+" just registered!----------");
         messagingTemplate.convertAndSend("/channel/registerCallbackSocket", outMessage);
     }
 
     public void sendRemovalMessage(String username) {
         chatWrapper.getRegisteredUsers().replaceAll(s -> s.equals(username) ? "deleted" : s);
-        System.out.println("--------------User:"+username+" deleted their account!----------");
+        //System.out.println("--------------User:"+username+" deleted their account!----------");
         for (String s : chatWrapper.getRegisteredUsers()) {
             if (s.equals("deleted")) {
                 chatWrapper.getRegisteredUsers().remove(s);

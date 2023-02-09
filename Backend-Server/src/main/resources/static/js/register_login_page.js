@@ -1,3 +1,5 @@
+//let csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1').split(",")[0];
+
 function login() {
     let username = document.getElementById("username_login").value;
     let password = document.getElementById("password_login").value;
@@ -12,17 +14,21 @@ function login() {
     //console.log(encodedUser);
 
     let settings = {
-        "url": "http://localhost:8080/user/login", "method": "POST", "headers": {
-            "Authorization": "Basic " + encodedUser
+        "url": "http://10.19.1.2:8443/user/login", "method": "POST", "headers": {
+            "Authorization": "Basic " + encodedUser,
+            "Content-Type": "application/json",
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+
         },
     };
 
     $.ajax(settings).always(function (response) {
-        console.log(response);
-        console.log(response.status);
+       // console.log(response);
+       // console.log(response.status);
         if (response === "Logged in!") {
-            document.cookie = username + ",public";
-            window.location.href = "http://localhost:8080/chat";
+            document.cookie = "USERNAME=" + username;
+            document.cookie = "ROOM=" + "public";
+            window.location.href = "http://10.19.1.2:8443/chat";
         } else if (response.status === 401 && response.responseText === "HTTP Status 401 - User is disabled\n") {
             sendNotification(401, "You need to activate your account first!");
         } else if (response.status === 401 && response.responseText === "HTTP Status 401 - Bad credentials\n") {
@@ -47,15 +53,15 @@ function register() {
     let passwordConfirm = document.getElementById("confirm-password").value;
 
     let usernameRegex = /^[a-zA-Z]+$/;
-    if (username === ""){
+    if (username === "") {
         sendNotification(403, "Username can't be empty!");
         return;
     }
-    if(email === ""){
+    if (email === "") {
         sendNotification(403, "Email can't be empty!");
         return;
     }
-    if(password === ""){
+    if (password === "") {
         sendNotification(403, "Password can't be empty!");
         return;
     }
@@ -65,7 +71,7 @@ function register() {
         return;
     }
 
-    if(! username.match(usernameRegex) && username.length >= 3 && username.length <= 20) {
+    if (!username.match(usernameRegex) && username.length >= 3 && username.length <= 20) {
         sendNotification(401, "Username can only contain letters, minimum 3 characters and maximum 20 characters!");
         event.preventDefault();
         return;
@@ -81,15 +87,16 @@ function register() {
     }
 
     let settings = {
-        "url": "http://localhost:8080/user/register", "method": "POST", "timeout": 0, "headers": {
-            "Content-Type": "application/json"
+        "url": "http://10.19.1.2:8443/user/register", "method": "POST", "timeout": 0, "headers": {
+            "Content-Type": "application/json",
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
         }, "data": JSON.stringify(user),
     };
 
     $.ajax(settings).always(function (response) {
-        console.log(response);
+       // console.log(response);
         if (response === "Success") {
-            sendNotification(200, "Successfully registered! Please check your inbox");
+            sendNotification(200, "Successfully registered! Please check your inbox/spam");
             document.getElementById("confirm-password").value = "";
             document.getElementById("password_register").value = "";
             document.getElementById("username_register").value = "";
@@ -102,7 +109,7 @@ function register() {
             sendNotification(500, "Your username or email is already taken!");
         } else if (response.status === 404) {
             sendNotification(404, "Server could not be resolved!");
-        } else{
+        } else {
             sendNotification(404, "Server is dead!");
         }
 
@@ -155,15 +162,25 @@ async function sendNotification(errorCode, message) {
 $(document).ready(function () {
 
     let settings = {
-        "url": "http://localhost:8080/user/login", "method": "POST",
+        "url": "http://10.19.1.2:8443/user/login", "method": "POST",
+        "timeout": 0, "headers": {
+            "Content-Type": "application/json",
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+        }
     };
 
     $.ajax(settings).always(function (response) {
-        console.log(response);
-        console.log(response.status);
+        //console.log(response);
+        //console.log(response.status);
         if (response === "Logged in!") {
-            window.location.href = "http://localhost:8080/chat";
+            window.location.href = "http://10.19.1.2:8443/chat";
         }
     });
 
 });
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}

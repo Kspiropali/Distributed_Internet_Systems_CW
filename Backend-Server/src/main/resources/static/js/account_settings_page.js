@@ -40,14 +40,15 @@ function changeDetails() {
 
 
     let settings = {
-        "url": "http://localhost:8080/user/update",
+        "url": "http://10.19.1.2:8443/user/update",
         "method": "POST",
         "timeout": 0,
         "headers": {
             "Content-Type": "application/json",
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
         },
         "data": JSON.stringify({
-            "username": document.cookie.split(",")[0],
+            "username": getCookie("USERNAME"),
             "name": username,
             "surname": lastname,
             "password": password,
@@ -58,9 +59,22 @@ function changeDetails() {
     };
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
+        //  console.log(response);
         if (response.status === 401) {
-            document.cookie = "";
+            let settings = {
+                "url": "http://10.19.1.2:8443/logout",
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+                }
+            };
+
+            $.ajax(settings).done(function () {
+                // console.log(response);
+                window.location.href = "http://10.19.1.2:8443/";
+            });
+            deleteAllCookies();
         } else if (response === "User updated") {
 
             sendStatus("green", "User Details updated successfully");
@@ -123,40 +137,53 @@ async function sendStatus(status, message) {
     }
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 function deleteAccount() {
-    let settings = {
-        "url": "http://localhost:8080/user/delete",
+
+
+    const settings = {
+        "url": "http://10.19.1.2:8443/user/delete",
         "method": "POST",
         "timeout": 0,
         "headers": {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
         },
         "data": JSON.stringify({
-            "username": document.cookie.split(",")[0]
+            "username": getCookie("USERNAME"),
         }),
     };
 
     $.ajax(settings).done(function (response) {
-        console.log(response);
+        // console.log(response);
         //session expired
         if (response.status === 401) {
-            document.cookie = "";
-            window.location.href = "http://localhost:8080/";
+            deleteAllCookies();
+            window.location.href = "http://10.19.1.2:8443/";
             //user deleted
         } else if (response === "User deleted") {
             let settings = {
-                "url": "http://localhost:8080/logout",
-                "method": "GET",
+                "url": "http://10.19.1.2:8443/logout",
+                "method": "POST",
                 "timeout": 0,
+                "headers": {
+                    "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+                }
             };
 
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                window.location.href = "http://localhost:8080/";
+            $.ajax(settings).done(function () {
+                // console.log(response);
+                window.location.href = "http://10.19.1.2:8443/";
             });
 
         }
     });
+    deleteAllCookies();
 }
 
 async function uploadAvatarImage() {
@@ -181,32 +208,36 @@ async function uploadAvatarImage() {
 
 
         let settings = {
-            "url": "http://localhost:8080/user/upload/avatar",
+            "url": "http://10.19.1.2:8443/user/upload/avatar",
             "method": "POST",
             "timeout": 0,
             "headers": {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
             },
             "data": JSON.stringify({
-                "username": document.cookie.split(",")[0],
+                "username": getCookie("USERNAME"),
                 "avatar": base64String
             }),
         };
 
         $.ajax(settings).done(function (response) {
-            console.log(response);
+            // console.log(response);
 
             if (response.status === 401) {
                 //logout since session is expired
                 let settings = {
-                    "url": "http://localhost:8080/logout",
+                    "url": "http://10.19.1.2:8443/logout",
                     "method": "GET",
                     "timeout": 0,
+                    "headers": {
+                        "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+                    }
                 };
 
-                $.ajax(settings).done(function (response) {
-                    console.log(response);
-                    window.location.href = "http://localhost:8080/";
+                $.ajax(settings).done(function () {
+                    // console.log(response);
+                    window.location.href = "http://10.19.1.2:8443/";
                 });
 
 
@@ -226,7 +257,7 @@ async function uploadAvatarImage() {
     try {
         reader.readAsDataURL(file);
     } catch (e) {
-        console.log(e);
+        // console.log(e);
     }
 
 
@@ -242,8 +273,19 @@ $(document).ready(function () {
 function onRegisterSocketConnected() {
     try {
         currentRegistrationSubscription_1 = registerStompClient_1.subscribe(`/channel/registerCallbackSocket/sendMessage`);
-    }catch (e){
+    } catch (e) {
         registerStompClient_1.connect({}, onRegisterSocketConnected);
     }
 
+}
+
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
 }

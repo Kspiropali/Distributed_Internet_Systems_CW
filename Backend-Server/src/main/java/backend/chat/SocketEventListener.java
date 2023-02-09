@@ -31,11 +31,11 @@ public class SocketEventListener {
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
         String username = Objects.requireNonNull(headerAccessor.getUser()).getName();
-        System.out.println("Calling login function: before adding:"+users);
+        //System.out.println("Calling login function: before adding:"+users);
         if(!users.contains(username)) {
             users.add(username);
         }
-        System.out.println("Calling login function: after adding:"+users);
+        //System.out.println("Calling login function: after adding:"+users);
         logger.info("Received a new web socket connection. from User: " + username);
     }
 
@@ -49,7 +49,7 @@ public class SocketEventListener {
         String destination = (String) headerAccessor.getSessionAttributes().get("destination");
         //System.out.println("ROOMID"+roomId);
         if (username != null) {
-            System.out.println("Calling logout function: before removing:"+users);
+            //System.out.println("Calling logout function: before removing:"+users);
             logger.info("User Disconnected: " + username);
 
             Message chatMessage = new Message();

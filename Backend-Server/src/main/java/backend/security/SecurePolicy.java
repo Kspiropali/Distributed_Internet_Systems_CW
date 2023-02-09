@@ -13,7 +13,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.server.csrf.CsrfToken;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.server.WebFilter;
+import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +48,8 @@ public class SecurePolicy extends WebSecurityConfigurerAdapter {
             "/webfonts/**",
             "/favicon.ico**",
             "/config/**",
-            "/error**"
+            "/error**",
+            "/.well-known/acme-challenge/**"
     };
 
     public SecurePolicy(@Qualifier("userServiceImpl") UserDetailsService userService, PasswordEncoder passwordEncoder, MyBasicAuthenticationEntryPoint authenticationEntryPoint) {
@@ -50,11 +61,11 @@ public class SecurePolicy extends WebSecurityConfigurerAdapter {
     //Security context configurer and session provider configurer
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.headers().frameOptions().disable().and()
-                .cors().and()
-                //Cross site request forgery disable for testing purposes
-                .csrf().disable()
 
+        http.headers().frameOptions().disable().and()
+                .cors().disable()
+                //Cross site request forgery disable for testing purposes
+                .csrf().disable()//ignoringAntMatchers("/h2-console/**", "/user/delete/**").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .formLogin().loginPage("/").permitAll().usernameParameter("username").passwordParameter("password")
                 .and()
                 .authorizeRequests()
@@ -67,6 +78,14 @@ public class SecurePolicy extends WebSecurityConfigurerAdapter {
                 .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint);
 
     }
+
+    @Bean
+    public WebFilter addCsrfToken() {
+        return (exchange, next) -> Objects.requireNonNull(exchange.<Mono<CsrfToken>>getAttribute(CsrfToken.class.getName()))
+                .doOnSuccess(token -> {}) // do nothing, just subscribe :/
+                .then(next.filter(exchange));
+    }
+
 
     //Data access object spring security configuration
     @Override
@@ -81,6 +100,16 @@ public class SecurePolicy extends WebSecurityConfigurerAdapter {
         return provider;
     }
 
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("https://amazin12gapp.tplinkdns.com:8443/"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Bean
     public SessionRegistry sessionRegistry() {

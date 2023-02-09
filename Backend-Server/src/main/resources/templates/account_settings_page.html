@@ -22,7 +22,7 @@
     <script type="application/javascript" src="/js/account_settings_page.js"></script>
     <script type="application/javascript">
         particlesJS.load('particles-js', '/config/particles.json', function () {
-            console.log('callback - particles.js config loaded');
+            //console.log('callback - particles.js config loaded');
         });
     </script>
 
@@ -36,7 +36,7 @@
     <div class="d-flex align-items-start py-3 border-bottom">
         <!--Avatar image of the user-->
 
-        <img id="avatar_image" src="">
+        <img id="avatar_image" src="" alt="">
 
         <div class="pl-sm-4 pl-2" id="img-section">
             <b>Profile Photo</b>
@@ -45,7 +45,7 @@
             <input type="file" onchange="uploadAvatarImage()" id="image_avatar" accept="image/jpeg,image/jpg,image/png"
                    style="display:none;">
         </div>
-        <button class="btn btn-primary mr-3" onclick="window.location.href = `http://localhost:8080/chat`"
+        <button class="btn btn-primary mr-3" onclick="window.location.href = `http://10.19.1.2:8443/chat`"
                 style="margin-left: auto;width: 100px;">HOME
         </button>
     </div>

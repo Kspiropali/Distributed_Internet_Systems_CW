@@ -1,17 +1,26 @@
 'use strict';
 
+
 let stompClient;
 let currentSubscription;
 let userToAvatarMap = new Map();
-let username = document.cookie.split(",")[0];
-let topic = document.cookie.split(",")[1];
-let socket = new SockJS('/ws');
+let username = getCookie("USERNAME")
+let topic = getCookie("ROOM");
+//let socket = new SockJS('/ws');
+//socket.debug = false;
 
 //for registration notification
 let registerSocket = new SockJS('/ws');
+registerSocket.debug = false;
 let registerStompClient;
 let currentRegistrationSubscription;
 
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
 
 function uploadImage() {
 
@@ -38,7 +47,7 @@ function uploadImage() {
             content: base64String,
             type: 'PICTURE'
         };
-        stompClient.send(`${topic}/sendMessage`, {}, JSON.stringify(chatMessage));
+        stompClient.send(`${topic}/sendMessage`, { headers: { "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") } }, JSON.stringify(chatMessage));
     }
 
     try {
@@ -52,11 +61,12 @@ function uploadImage() {
 
 
 // Enter new room and leave the other one
-function enterRoom(newRoomId) {
+async function enterRoom(newRoomId) {
     let toUser;
     let roomId = newRoomId;
     //setting roomId cookie
-    document.cookie = username + "," + roomId;
+    document.cookie = "USERNAME=" + username;
+    document.cookie = "ROOM=" + roomId;
     // console.log(roomId)
     //if roomId is not public, it will be in form of user1user2
     //with user1 or user2 being our username, so we remove the username
@@ -76,7 +86,7 @@ function enterRoom(newRoomId) {
 
 
     stompClient.send(`${topic}/addUser`,
-        {},
+        {headers: {"X-XSRF-TOKEN": getCookie("XSRF-TOKEN")}},
         JSON.stringify({sender: username, type: 'JOIN', destination: roomId})
     );
 }
@@ -88,11 +98,6 @@ function onConnected() {
 
 // Send message to the server, chatrooms
 function sendMessage(event) {
-    // check if event.key is literal string
-    if (event.key === '"') {
-        event.preventDefault();
-        return;
-    }
     let messageInput = document.getElementById("chat_box").value;
 
     // check if enter key was pressed
@@ -112,7 +117,7 @@ function sendMessage(event) {
         content: messageInput,
         type: 'CHAT'
     };
-    stompClient.send(`${topic}/sendMessage`, {}, JSON.stringify(chatMessage));
+    stompClient.send(`${topic}/sendMessage`, { headers: { "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") } }, JSON.stringify(chatMessage));
     document.getElementById("chat_box").value = "";
 
     event.preventDefault();
@@ -250,18 +255,22 @@ function onMessageReceived(payload) {
 }
 
 // Load message history from the server and enters a room
-function changeChatRoom(roomId) {
+async function changeChatRoom(roomId) {
     enterRoom(roomId);
     loadMessageHistory(roomId);
     document.getElementById("scroller").scrollBy(0, 1000000);
 }
 
 //helper function to load message history from the server
-function loadMessageHistory(room_id_name) {
+async function loadMessageHistory(room_id_name) {
 
     let settings = {
-        "url": "http://localhost:8080/download/chat/" + room_id_name + "/messages",
-        "method": "GET"
+        "url": "http://10.19.1.2:8443/download/chat/" + room_id_name + "/messages",
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        }
     };
 
     $.ajax(settings).done(function (response) {
@@ -373,19 +382,24 @@ function loadMessageHistory(room_id_name) {
 
 //When page is ready
 $(document).ready(function () {
+    let csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1').split(",")[0];
+    document.cookie = "XSRF-TOKEN=" + csrfToken;
 
+    let socket = new SockJS('/ws');
+    socket.debug = null;
 
     //setting up the actual livechat websocket
     stompClient = Stomp.over(socket);
+    stompClient.debug = null;
     stompClient.connect({}, onConnected);
 
     //setting up the register websocket
     registerStompClient = Stomp.over(registerSocket);
+    registerSocket.debug = null;
     registerStompClient.connect({}, onRegisterSocketConnected);
 
     //get all the users avatars
     getAllAvatars();
-    initializeSockets();
     //getting all registered users
     getAllRegisteredUsers();
     //setting up the active users list
@@ -408,14 +422,15 @@ $(document).ready(function () {
 
 });
 
-function initializeSockets() {
-
-}
 
 function getActiveUsers() {
     let settings = {
-        "url": "http://localhost:8080/download/chat/users",
+        "url": "http://10.19.1.2:8443/download/chat/users",
         "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        }
     };
 
     $.ajax(settings).done(function (response) {
@@ -446,26 +461,46 @@ function getActiveUsers() {
 // Logouts the user from the chatroom and clears the session/cookies
 function logout() {
     stompClient.send(`${topic}/leave`,
-        {},
+        { headers: { "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") } },
         JSON.stringify({sender: username, type: 'LEAVE'})
     );
     let settings = {
-        "url": "http://localhost:8080/logout",
+        "url": "http://10.19.1.2:8443/logout",
         "method": "POST",
         "timeout": 0,
+        "headers": {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        }
     };
 
+
     $.ajax(settings).done(function () {
-        window.location.href = "http://localhost:8080/";
+        window.location.href = "http://10.19.1.2:8443/";
+        deleteAllCookies();
     });
 
 
 }
 
+function deleteAllCookies() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
 function getAllRegisteredUsers() {
     let settings = {
-        "url": "http://localhost:8080/download/chat/registeredUsers",
+        "url": "http://10.19.1.2:8443/download/chat/registeredUsers",
         "method": "GET",
+        "timeout": 0,
+        "headers": {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        }
     };
 
     $.ajax(settings).done(function (response) {
@@ -518,7 +553,7 @@ function registerMessageReceived(payload) {
             socketByAlphabeticalOrder = message.sender + username;
         }
         // console.log(socketByAlphabeticalOrder);
-        console.log(message.content);
+        //console.log(message.content);
         document.getElementById("active_users").innerHTML += `<li class="person"  onclick="changeChatRoom(\`` + socketByAlphabeticalOrder + `\`)" data-chat="person4" id="` + message.sender + `">
                                                                             <div class="user">
                                                                                 <img src="data:image/jpeg;base64, ` + default_image + `" alt="">
@@ -547,9 +582,9 @@ function settingsPage() {
         content: null,
         type: 'LEAVE'
     };
-    stompClient.send(`${topic}/sendMessage`, {}, JSON.stringify(chatMessage));
+    stompClient.send(`${topic}/sendMessage`, { headers: { "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") } }, JSON.stringify(chatMessage));
 
-    window.location.href = "http://localhost:8080/settings";
+    window.location.href = "http://10.19.1.2:8443/settings";
 }
 
 
@@ -577,7 +612,7 @@ function record() {
     try {
         recorder.start();
     } catch (e) {
-        console.log("Give permission first!");
+        // console.log("Give permission first!");
     }
 
 }
@@ -588,7 +623,7 @@ function stopRecord() {
     try {
         recorder.stop();
     } catch (e) {
-        console.log("Recording stopped or has not started yet!");
+        // console.log("Recording stopped or has not started yet!");
     }
 }
 
@@ -609,7 +644,7 @@ function makeLink() {
             content: base64data,
             type: 'RECORDING'
         };
-        stompClient.send(`${topic}/sendMessage`, {}, JSON.stringify(chatMessage));
+        stompClient.send(`${topic}/sendMessage`, { headers: { "X-XSRF-TOKEN": getCookie("XSRF-TOKEN") } }, JSON.stringify(chatMessage));
     }
     reader.readAsDataURL(blob);
     ////////////////////////
@@ -643,8 +678,12 @@ function convertURIToBinary(dataURI) {
 ///get all avatar images
 function getAllAvatars() {
     let settings = {
-        "url": "http://localhost:8080/user/download/avatars",
+        "url": "http://10.19.1.2:8443/user/download/avatars",
         "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        },
         async: false,
     };
 

@@ -5,8 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Profile;
 
+
 @SpringBootApplication
-/*@CrossOrigin(origins = "*", allowedHeaders = "*")*/
+/*@CrossOrigin(origins = "***", methods = {
+        org.springframework.web.bind.annotation.RequestMethod.GET,
+        org.springframework.web.bind.annotation.RequestMethod.POST,
+        org.springframework.web.bind.annotation.RequestMethod.OPTIONS}
+)*/
 public class DistributedSystems {
 
     public static void main(String[] args) {
@@ -25,6 +30,4 @@ public class DistributedSystems {
     public String deployBean() {
         return "deploy";
     }
-
-
 }

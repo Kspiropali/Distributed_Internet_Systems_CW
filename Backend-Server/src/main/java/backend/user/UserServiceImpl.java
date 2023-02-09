@@ -47,13 +47,13 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         user_create.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user_create);
-        System.out.println("--------------User with username: "+user_create.getUsername()+" has been created successfully!----------");
+       // System.out.println("--------------User with username: "+user_create.getUsername()+" has been created successfully!----------");
         return user_create;
     }
 
     @Override
     public String updateUser(User user){
-        System.out.println(user.getUsername());
+        //System.out.println(user.getUsername());
         if (checkIfUserExistByUsername(user.getUsername())) {
             User user_update = userRepository.findUserByUsername(user.getUsername()).get();
             //checks
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             user_update.setLanguage(user.getLanguage());
             user_update.setPassword(passwordEncoder.encode(user.getPassword()));
             user_update.setOptIn(user.isOptIn());
-            System.out.println("Saving user with details: "+user_update);
+            //System.out.println("Saving user with details: "+user_update);
 
             userRepository.save(user_update);
         }else {
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public String deleteUser(User user){
         if (checkIfUserExistByUsername(user.getUsername())) {
             User user_delete = userRepository.findUserByUsername(user.getUsername()).get();
-            System.out.println("User exists with username: " + user.getUsername());
+            //System.out.println("User exists with username: " + user.getUsername());
             userRepository.delete(user_delete);
             //sending deleted event
             eventPublisher.publishCustomEvent(user_delete.getUsername(), "user deletion");
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if (checkIfUserExistByUsername(username)) {
             User userToUpdate = userRepository.findUserByUsername(username).get();
             userToUpdate.setAvatar(avatar);
-
+            userRepository.save(userToUpdate);
             //sending deleted event
             //eventPublisher.publishCustomEvent(user_delete.getUsername(), "user deletion");
             return "Avatar updated";
