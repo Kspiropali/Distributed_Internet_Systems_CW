@@ -14,11 +14,15 @@ function login() {
     //console.log(encodedUser);
 
     let settings = {
-        "url": "http://10.19.1.2:8443/user/login", "method": "POST", "headers": {
+        "url": "http://localhost/user/login", "method": "POST", "headers": {
             "Authorization": "Basic " + encodedUser,
             "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "1728000",
             "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
-
         },
     };
 
@@ -28,7 +32,7 @@ function login() {
         if (response === "Logged in!") {
             document.cookie = "USERNAME=" + username;
             document.cookie = "ROOM=" + "public";
-            window.location.href = "http://10.19.1.2:8443/chat";
+            window.location.href = "http://localhost/chat";
         } else if (response.status === 401 && response.responseText === "HTTP Status 401 - User is disabled\n") {
             sendNotification(401, "You need to activate your account first!");
         } else if (response.status === 401 && response.responseText === "HTTP Status 401 - Bad credentials\n") {
@@ -162,10 +166,15 @@ async function sendNotification(errorCode, message) {
 $(document).ready(function () {
 
     let settings = {
-        "url": "http://10.19.1.2:8443/user/login", "method": "POST",
+        "url": "http://localhost/user/login", "method": "POST",
         "timeout": 0, "headers": {
             "Content-Type": "application/json",
-            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Max-Age": "1728000",
         }
     };
 
@@ -173,7 +182,7 @@ $(document).ready(function () {
         //console.log(response);
         //console.log(response.status);
         if (response === "Logged in!") {
-            window.location.href = "http://10.19.1.2:8443/chat";
+            window.location.href = "http://localhost/chat";
         }
     });
 

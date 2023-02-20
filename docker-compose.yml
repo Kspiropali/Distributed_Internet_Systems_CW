@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      dockerfile: ./Dockerfile-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - main
+    depends_on:
+      - backend
+
+  backend:
+    build:
+        dockerfile: ./Dockerfile-backend
+    networks:
+      main:
+        ipv4_address: 10.19.1.2
+
+networks:
+  main:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.19.1.0/24

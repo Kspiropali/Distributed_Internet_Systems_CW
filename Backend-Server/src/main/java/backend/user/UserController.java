@@ -20,6 +20,7 @@ public class UserController {
     private final TokenService tokenService;
     private final EventPublisher eventPublisher;
 
+    @CrossOrigin(origins = "http://localhost")
     @PostMapping(path = "/register")
     public String registerUser(@RequestBody User user) {
         //Email validator needed
@@ -34,6 +35,7 @@ public class UserController {
         return "Success";
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @GetMapping(path = "/verifyRegistration")
     public ModelAndView verifyRegistration(@RequestParam("token") String token) {
         //searches for token in database, if its valid
@@ -50,6 +52,7 @@ public class UserController {
         return new ModelAndView("email_confirmed_page");
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @GetMapping("/resendVerificationToken")
     public String resendVerificationToken(@RequestParam("token") String oldToken) {
         Token newVerificationToken = tokenService.generateNewToken(oldToken);
@@ -60,6 +63,7 @@ public class UserController {
         return "Verification Link sent";
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/update")
     public String updateUser(Authentication authentication, @RequestBody User user) {
@@ -71,6 +75,7 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/delete")
     public String deleteUser(Authentication authentication, @RequestBody User user) {
@@ -84,6 +89,7 @@ public class UserController {
         return userService.deleteUser(user);
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/upload/avatar")
     public String uploadAvatarImage(Authentication authentication, @RequestBody User user) {
@@ -98,6 +104,7 @@ public class UserController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/download/avatars")
     public ArrayList<ArrayList<String>> downloadAvatarImages() {
@@ -106,6 +113,7 @@ public class UserController {
     }
 
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/login")
     public String terminalLogin() {
@@ -113,6 +121,7 @@ public class UserController {
         return "Logged in!";
     }
 
+    @CrossOrigin(origins = "http://localhost")
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/login")
     public String browserLogin() {

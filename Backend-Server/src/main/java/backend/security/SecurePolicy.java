@@ -63,7 +63,7 @@ public class SecurePolicy extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.headers().frameOptions().disable().and()
-                .cors().disable()
+                .cors().and()
                 //Cross site request forgery disable for testing purposes
                 .csrf().disable()//ignoringAntMatchers("/h2-console/**", "/user/delete/**").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .formLogin().loginPage("/").permitAll().usernameParameter("username").passwordParameter("password")
